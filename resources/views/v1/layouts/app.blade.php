@@ -2,13 +2,13 @@
 <html lang="{{ app()->getLocale() }}">
     @include(__v().'.layouts.partials.head')
     @if (is_route(Route::currentRouteName()))
-        <body class="hold-transition login-page with-bg modern-messenger-skin">
+        <body class="hold-transition login-page with-bg modern-materialui-skin">
             @yield('content')
             <script src="{{ asset(__v().'/js/app.js') }}"></script>
             @yield('js')
         </body>
     @else
-        <body class="hold-transition modern-messenger-skin fixed sidebar-mini">
+        <body class="hold-transition modern-materialui-skin fixed sidebar-mini">
             <div id="app" class="wrapper">
                 @include(__v().'.layouts.partials.header')
                 @include(__v().'.layouts.partials.leftbar')

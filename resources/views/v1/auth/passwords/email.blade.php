@@ -16,7 +16,7 @@
             @csrf
             <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
                 <span class="fa fa-envelope form-control-feedback"></span>
-                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus autocomplete="off">
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus autocomplete="off" placeholder="Type your email">
                 @if ($errors->has('email'))
                     <span class="help-block" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>

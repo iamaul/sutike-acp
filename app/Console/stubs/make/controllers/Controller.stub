@@ -1,0 +1,150 @@
+<?php
+
+namespace {{DummyNamespace}}Http\Controllers\{{DummyClass}};
+
+use {{DummyNamespace}}Models\{{DummyClass}};
+use Illuminate\Http\Request;
+use {{DummyNamespace}}Http\Controllers\Controller;
+use {{DummyNamespace}}Http\Requests\{{DummyClass}}\Request as {{DummyClass}}Request;
+
+class {{DummyClass}}Controller extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct({{DummyClass}} ${{property}})
+    {
+        parent::__construct();
+        $this->{{property}} = ${{property}};
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function index({{DummyClass}}Request $request)
+    {
+        if ($request->ajax()) {
+            return app('datatables')->eloquent($this->{{property}}->query())
+                ->addColumn('action', __v().'.{{property}}.datatables.action')
+                ->rawColumns(['action'])
+                ->orderColumns([], ':column $1')
+                ->addIndexColumn()
+                ->make(true);
+        }
+        return view("{$this->view}::{{dir}}.index");
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function create({{DummyClass}}Request $request)
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \{{DummyNamespace}}Http\Requests\{{DummyClass}}\Request
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function store({{DummyClass}}Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function show({{DummyClass}}Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function edit({{DummyClass}}Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \{{DummyNamespace}}Http\Requests\{{DummyClass}}\Request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function update({{DummyClass}}Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function destroy({{DummyClass}}Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove multiple resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    public function destroyMany({{DummyClass}}Request $request)
+    {
+        if ($request->ajax()) {
+            $id_can_be_destroy = [];
+            foreach ($request->all() as $id) {
+                ${{property}} = $this->{{property}}->findOrFail($id);
+                if (${{property}}) array_push($id_can_be_destroy, $id);
+            }
+            if (${{property}}->destroy($id_can_be_destroy)) {
+                return response()->successResponse(microtime_float(), [], 'Deleted {{property}} successfully');
+            }
+            return response()->failedResponse(microtime_float(), 'Deleted {{property}} unsuccessfully');
+        }
+    }
+}

@@ -13,14 +13,14 @@ class Request extends FormRequest
      */
     public function authorize()
     {
-        if($this->isMethod('get')){
-            if(auth()->user()->canIndexAccess()) return true;
+        if ($this->isMethod('get')) {
+            if (auth()->user()->canIndexAccess()) return true;
             return false;
-        }elseif($this->isMethod('post')){
-            if(auth()->user()->canStoreAccess()) return true;
+        } else if ($this->isMethod('post')) {
+            if (auth()->user()->canStoreAccess()) return true;
             return false;
-        }elseif($this->isMethod('put') || $this->isMethod('patch')){
-            if(auth()->user()->canStoreAccess()) return true;
+        } else if ($this->isMethod('put') || $this->isMethod('patch')) {
+            if (auth()->user()->canStoreAccess()) return true;
             return false;
         }
         return false;

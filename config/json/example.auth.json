@@ -1,0 +1,8 @@
+{
+    "default_role": "superadmin",
+    "user": {
+        "email": "root@magenta.id",
+        "password": "eyJpdiI6IlRwQ1hsem1SdGxsRm95VGtsRXFsUWc9PSIsInZhbHVlIjoic1JBUm5ES2tCa2YyXC9BSXE2RjdDNlNoVTRHVEJvY3N6SEJYWTRcL05HNkJrPSIsIm1hYyI6ImQ3NDI0NWFjYjA4OGUxYzViODgzYTBmNmFiZDMzZmRiZDI0NDE3YjhjODhkM2M1ZmRhZDExZWM5MWNmYWJkMTcifQ=="
+    },
+    "production": true
+}

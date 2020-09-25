@@ -11,7 +11,7 @@ if(! function_exists('microtime_float')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function microtime_float(){
@@ -27,7 +27,7 @@ if(! function_exists('__v')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function __v(){
@@ -41,7 +41,7 @@ if(! function_exists('__app_name')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function __app_name(){
@@ -55,7 +55,7 @@ if(! function_exists('__prefix')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function __prefix(){
@@ -69,7 +69,7 @@ if(! function_exists('is_route')){
      * 
      * @return boolean
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function is_route($route){
@@ -89,7 +89,7 @@ if(! function_exists('nestable_render')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function nestable_render(array $data, string $list = '', $edit = null){
@@ -115,7 +115,7 @@ if(! function_exists('callout')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function callout($title, $description, $type, $icon = false, $dimmis = false){
@@ -142,7 +142,7 @@ if(! function_exists('callout_default')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function callout_default($description, $dimmis = false, $icon = false){
@@ -156,7 +156,7 @@ if(! function_exists('callout_primary')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function callout_primary($description, $dimmis = false, $icon = false){
@@ -170,7 +170,7 @@ if(! function_exists('callout_info')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function callout_info($description, $dimmis = false, $icon = false){
@@ -184,7 +184,7 @@ if(! function_exists('callout_success')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function callout_success($description, $dimmis = false, $icon = false){
@@ -198,7 +198,7 @@ if(! function_exists('callout_warning')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function callout_warning($description, $dimmis = false, $icon = false){
@@ -212,7 +212,7 @@ if(! function_exists('callout_danger')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function callout_danger($description, $dimmis = false, $icon = false){
@@ -226,7 +226,7 @@ if (! function_exists('alert')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function alert($title, $description, $type){
@@ -245,7 +245,7 @@ if(! function_exists('alert_default')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function alert_default($description){
@@ -259,7 +259,7 @@ if(! function_exists('alert_primary')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function alert_primary($description){
@@ -273,7 +273,7 @@ if(! function_exists('alert_info')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function alert_info($description){
@@ -287,7 +287,7 @@ if(! function_exists('alert_success')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function alert_success($description){
@@ -301,7 +301,7 @@ if(! function_exists('alert_warning')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function alert_warning($description){
@@ -315,7 +315,7 @@ if(! function_exists('alert_danger')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function alert_danger($description){
@@ -329,7 +329,7 @@ if(! function_exists('box_collapse')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function box_collapse($tooltip){
@@ -343,7 +343,7 @@ if(! function_exists('box_remove')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function box_remove($tooltip){
@@ -357,7 +357,7 @@ if(! function_exists('box_footer')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function box_footer(){
@@ -371,15 +371,14 @@ if(! function_exists('str_title')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function str_title($string = null){
-        if(is_null($string)){
-            $string = str_replace(__prefix(), '', Str::slug(Request::path()));
-            return ucwords(Str::slug($string, ' '));
-        }
-        return ucwords(Str::slug($string, ' '));
+        $title = (is_null($string)) ? 
+        str_replace(['_', '-', __prefix()], [' ', ' ', ''], str_replace(__prefix().'/', '', explode(".", Route::current()->getName())[0])) : 
+        str_replace(['_', '-', __prefix()], [' ', ' ', ''], $string);
+        return ucwords($title);
     }
 }
 
@@ -389,7 +388,7 @@ if(! function_exists('tooltip')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function tooltip($title, $position = null){
@@ -404,7 +403,7 @@ if(! function_exists('modal')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function modal($target){
@@ -418,7 +417,7 @@ if (! function_exists('loading_button')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function loading_button($type, $text){
@@ -432,7 +431,7 @@ if(! function_exists('carbon')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function carbon(){
@@ -446,7 +445,7 @@ if(! function_exists('roman')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function roman($number){
@@ -485,7 +484,7 @@ if (! function_exists('email')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function email($str){
@@ -501,7 +500,7 @@ if (! function_exists('toPrice')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function toPrice($str){
@@ -515,7 +514,7 @@ if (! function_exists('toFloat')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function toFloat($str){
@@ -529,7 +528,7 @@ if (! function_exists('toPriceFloat')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function toPriceFloat($str){
@@ -543,7 +542,7 @@ if (! function_exists('toPercent')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function toPercent($str){
@@ -558,7 +557,7 @@ if(! function_exists('lang')) {
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function lang(){
@@ -575,7 +574,7 @@ if(!function_exists('color_shuffle')){
      * 
      * @return string
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     function color_shuffle(){
@@ -583,5 +582,259 @@ if(!function_exists('color_shuffle')){
             'btn-black', 'btn-dark_light', 'btn-blue', 'btn-blue_light', 'btn-green', 'btn-aqua', 'btn-orange', 'btn-purple', 'btn-indigo', 'btn-pink', 'btn-fusia', 'btn-teal', 'btn-cyan', 'btn-grey', 'btn-red', 'btn-red_light', 'btn-yellow', 'btn-dark', 'btn-online', 'btn-code_blue', 'btn-code_blue_light', 'btn-batman',
         ];
         return collect($shuffle)->shuffle()->first();
+    }
+}
+
+if (! function_exists('recursive_menu')) {
+    /**
+     * Execute array multidimensi
+     *
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function recursive_menu($type, $data = null, $parent = null){
+        if($type == 'GET'){
+            $json = [];
+            $data = \App\Models\Menu::whereParent($parent)->get();
+            foreach ($data as $key => $value) {
+                $json[$key]["id"] = $value["id"];
+                $json[$key]["queue"] = $value["queue"];
+                $json[$key]["en_name"] = $value["en_name"];
+                $json[$key]["id_name"] = $value["id_name"];
+                $json[$key]["icon"] = $value["icon"];
+                $json[$key]["route"] = $value["route"];
+                $json[$key]["child"] = recursive_menu('GET', null, $value['id']);
+            }
+            return $json;
+        }else{
+            foreach($data as $key => $value){
+                // change insert menu with menu_id
+                DB::table('menus')->insert([
+                    'id' => $value['id'],
+                    'parent' => $parent,
+                    'queue' => $value['queue'],
+                    'en_name' => $value['en_name'],
+                    'id_name' => $value['id_name'],
+                    'icon' => $value['icon'],
+                    'route' => $value['route'],
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
+                if(count($value['child']) > 0){
+                    recursive_menu('PUT', $value['child'], $value['id']);
+                }
+            }
+        }
+    }
+}
+
+if(! function_exists('get_json_config')){
+    /**
+     * Get json config
+     * 
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function get_json_config($file){
+        return json_decode(file_get_contents(config_path("/json/{$file}.json")), true);
+    }
+}
+
+if(! function_exists('set_json_config')){
+    /**
+     * Set json config
+     * 
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function set_json_config($file, $data){
+        return file_put_contents(config_path("/json/{$file}.json"), json_encode($data, JSON_PRETTY_PRINT));
+    }
+}
+
+if (! function_exists('get_json_user')) {
+    /**
+     * Get JSON of user
+     *
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function get_json_user() {
+        return get_json_config('auth');
+    }
+}
+
+if(! function_exists('set_json_user')){
+    /**
+     * Set json user
+     * 
+     * @return mixed
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function set_json_user(...$args){
+        $data = [];
+        $json = get_json_config('auth');
+        if(count($args) < 1) {
+            $data['default_role'] = $json['default_role'];
+            $data['user'] = $json['user'];
+            $data['production'] = true;
+            set_json_config('auth', $data);
+            set_json_user_menu();
+        }else{
+            $data['default_role'] = $args[2];
+            $data['user']['email'] = $args[0];
+            $data['user']['password'] = $args[1];
+            $data['production'] = true;
+            set_json_config('auth', $data);
+            set_json_user_menu();
+        }
+    }
+}
+
+if(! function_exists('get_json_user_menu')){
+    /**
+     * Set json user_menu
+     * 
+     * @return mixed
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function get_json_user_menu(){
+        return get_json_config('user_menu')['user_menu'];
+    }
+}
+
+if(! function_exists('set_json_user_menu')){
+    /**
+     * Set json user_menu
+     * 
+     * @return mixed
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function set_json_user_menu(){
+        $data = [];
+        foreach(\App\Models\Menu::select('en_name')->get()->toArray() as $i => $v) $data['user_menu'][] = $v['en_name'];
+        set_json_config('user_menu', $data);
+    }
+}
+
+if(! function_exists('get_json_menu')){
+    /**
+     * Set json menu
+     * 
+     * @return mixed
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function get_json_menu(){
+        return get_json_config('menu');
+    }
+}
+
+if(! function_exists('set_json_menu')){
+    /**
+     * Set json menu
+     * 
+     * @return mixed
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function set_json_menu(){
+        set_json_config('menu', recursive_menu('GET'));
+    }
+}
+
+if (! function_exists('get_json_permissions')) {
+    /**
+     * Get JSON of permissions
+     *
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function get_json_permissions() {
+        return get_json_config('permissions');
+    }
+}
+
+if (! function_exists('set_json_permissions')) {
+    /**
+     * Set JSON of permissions
+     *
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function set_json_permissions() {
+        $collection = \App\Models\Permission::get();
+        $grouped = $collection->mapToGroups(function ($item, $key) {
+            return [$item['index'] => $item['name']];
+        })->toArray();
+        set_json_config('permissions', $grouped);
+    }
+}
+
+if (! function_exists('get_json_migrations')) {
+    /**
+     * Get JSON of migrations
+     *
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function get_json_migrations() {
+        return get_json_config('migrations');
+    }
+}
+
+if (! function_exists('set_json_migrations')) {
+    /**
+     * Set JSON of migrations
+     *
+     * @return array
+     * 
+     * @author magis <root@magis.id>
+     * @since @version 0.1
+     */
+    function set_json_migrations($migrations_file) {
+        set_json_config('migrations', $migrations_file);
+    }
+}
+
+/**
+ * Your helper created below
+ */
+
+
+if (! function_exists('get_barcode')) {
+    /**
+     * Return barcode
+     *
+     * @return array
+     * 
+     * @author 
+     * @since @version 0.1
+     */
+    function get_barcode($string) {
+        require_once('barcode128.php');
+        return bar128(stripcslashes($string));
     }
 }

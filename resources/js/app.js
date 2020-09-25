@@ -8,10 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.config.productionTip = false;
-Vue.config.debug = false;
-Vue.config.silent = !false; // disabled warning
-Vue.config.devtools = false;
+Vue.config.productionTip = window.App.APP_ENV;
+Vue.config.debug = window.App.APP_ENV;
+Vue.config.silent = ! window.App.APP_ENV; // disabled warning
+Vue.config.devtools = window.App.APP_ENV;
 
 /**
  * The following block of code may be used to automatically register your

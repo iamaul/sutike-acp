@@ -9,8 +9,6 @@
                     <h3 class="box-title">{{ str_title() }}</h3>
                     <div class="box-tools pull-right">
                         <button type="button" id="_btn_expand_collapse" class="btn btn-sm btn-flat btn-default" data-toggle="tooltip" title="Collapse All">{{ __('Collapse All') }}</button>
-                        {{ box_collapse('collapse') }}
-                        {{ box_remove('remove') }}
                     </div>
                 </div>
                 <div class="box-body">
@@ -45,8 +43,9 @@
             failedResponse(error);
         });
     });
+
     $(document).off('click', '#_btn_expand_collapse')
-        .on('click', '#_btn_expand_collapse', function(e){
+        .on('click', '#_btn_expand_collapse', function(e) {
         const text = $(this).text() === 'Expand All';
         const title = $(this).attr('data-original-title') === 'Expand All';
         $(this).text(text ? 'Collapse All' : 'Expand All');
@@ -55,8 +54,9 @@
         e.stopPropagation();
         $('#thumbs,#insideholder,#buttonsH').toggle();
     });
-    @if(auth()->user()->canStoreMenu())
-    function createForm(data){
+
+    @if (auth()->user()->canStoreMenu())
+    function createForm(data) {
         let e = '';
         e += '<div class="col-md-4">';
             e += '<form id="menuUpdate" class="form-horizontal" action="'+ window.App.APP_ROUTE+'/'+ data.id +'" method="POST">';
@@ -91,7 +91,8 @@
         e += '</div>';
         return e;
     }
-    $('.to-update').on('click', function(){
+
+    $('.to-update').on('click', function() {
         const Form = $('#menuUpdate');
         const validatorFields = {
             en_name: {
@@ -114,33 +115,33 @@
         const id = $(this).parents('li').data('id');
         const Axios = axios.get(`/menu/${id}/edit`);
         el.parents('.box-body').find('form').waitMeShow();
-            Axios.then((response) => {
-                el.parents('.box-body').find('.col-md-4').detach();
-                el.parent().addClass('col-md-8').removeClass('col-md-12');
-                el.parents('.box-body').children().append(createForm(response.data.data));
-                $('#menuUpdate').callFormValidation(validatorFields)
-                .on('success.form.fv', function(e) {
-                    e.preventDefault();
-                    $('#menuUpdate').waitMeShow();
-                    $('.btn-loading').loading(true);
-                    const $form = $(e.target),
-                        fv    = $form.data('formValidation');
-                    const Axios = axios.patch(`/menu/${id}`, $form.serialize());
-                    Axios.then((response) => {
-                        successResponse(response.data);
-                        window.location.href = window.App.APP_ROUTE;
-                        $('#menuUpdate').waitMeHide();
-                    });
-                    Axios.catch((error) => {
-                        failedResponse(error);
-                        $('#menuUpdate').waitMeHide();
-                    });
+        Axios.then((response) => {
+            el.parents('.box-body').find('.col-md-4').detach();
+            el.parent().addClass('col-md-8').removeClass('col-md-12');
+            el.parents('.box-body').children().append(createForm(response.data.data));
+            $('#menuUpdate').callFormValidation(validatorFields)
+            .on('success.form.fv', function(e) {
+                e.preventDefault();
+                $('#menuUpdate').waitMeShow();
+                $('.btn-loading').loading(true);
+                const $form = $(e.target),
+                    fv    = $form.data('formValidation');
+                const Axios = axios.patch(`/menu/${id}`, $form.serialize());
+                Axios.then((response) => {
+                    successResponse(response.data);
+                    window.location.href = window.App.APP_ROUTE;
+                    $('#menuUpdate').waitMeHide();
+                });
+                Axios.catch((error) => {
+                    failedResponse(error);
+                    $('#menuUpdate').waitMeHide();
                 });
             });
-            Axios.catch((error) => {
-                failedResponse(error);
-                el.parents('.box-body').find('.col-md-4').detach();
-            });
+        });
+        Axios.catch((error) => {
+            failedResponse(error);
+            el.parents('.box-body').find('.col-md-4').detach();
+        });
     });
     @endif
 </script>

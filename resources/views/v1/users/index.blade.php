@@ -7,10 +7,6 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ str_title() }}</h3>
-                    <div class="box-tools pull-right">
-                        {{ box_collapse('collapse') }}
-                        {{ box_remove('remove') }}
-                    </div>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12"> 
@@ -20,7 +16,7 @@
                                     <th>No</th>
                                     <th>Avatar</th>
                                     <th>Name</th>
-                                    <th>E-Mail</th>
+                                    <th>E-mail</th>
                                     <th>Roles</th>
                                     <th>Action</th>
                                 </tr>
@@ -50,20 +46,21 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="email" class="col-sm-3 control-label">E-Mail</label>
+        <label for="email" class="col-sm-3 control-label">E-mail</label>
         <div class="col-sm-9">
-            <input type="email" class="form-control" id="email" placeholder="E-Mail" name="email" autocomplete="off">
+            <input type="email" class="form-control" id="email" placeholder="E-mail" name="email" autocomplete="off">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="roles" class="col-sm-3 control-label">Password</label>
+        <div class="col-sm-9">
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" autocomplete="off">
         </div>
     </div>
     <div class="form-group">
         <label for="roles" class="col-sm-3 control-label">Roles</label>
         <div class="col-sm-9">
-            <select class="form-control select2" id="roles" placeholder="Roles" name="roles">
-                <option value=""></option>
-                @foreach ($roles as $i => $v)
-                    <option value="{{ $v->id }}">{{ ucwords($v->name) }}</option>
-                @endforeach
-            </select>
+            <select class="form-control select2" id="roles" data-placeholder="Roles" name="roles"></select>
         </div>
     </div>
 @endcomponent
@@ -71,30 +68,66 @@
 @endsection
 @section('js')
 <script>
-    const Table = $('#users').callDatatables(
-        [
-            { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
-            { data: 'avatar', name: 'avatar', orderable: true, searchable: false },
-            { data: 'name', name: 'name', orderable: true, searchable: true },
-            { data: 'email', name: 'email', orderable: true, searchable: true },
-            { data: 'roles', name: 'roles.name', orderable: true, searchable: true },
-            { data: 'action', name: 'action', orderable: false, searchable: false }
-        ],
-        [
-            {
-                className: 'text-center', 'targets': [ 0, -1, 1 ],
-            }
-        ],
-    );
+    const UserForm = $('#userModal');
+    const Table = $('#users').callFullDataTable({
+        buttons: {
+            visible: true,
+            refresh: true,
+            add: {
+                addCallback: function() {
+                    @if (auth()->user()->canCreateUsers())
+                        UserForm.find('.modal').modal('show');
+                        UserForm.find('.modal-title').html('CREATE USER');
+                        UserForm.attr('action', '/users');
+                        UserForm.find('[name="_method"]').val('POST');
+                        UserForm.find('#roles').callSelect2({
+                            ajax: true,
+                            url: `${window.App.APP_ROUTE}/roles`,
+                            modal: $('#userModal')
+                        }).setValueSelect2();
+                    @endif
+                }
+            },
+            trash: true,
+            export: {
+                advance: false,
+                csv: {
+                    url: ''
+                },
+                pdf: {
+                    url: ''
+                }
+            },
+            customize: []
+        },
+        data: {
+            columns: [
+                { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
+                { data: 'avatar', name: 'avatar', orderable: true, searchable: false },
+                { data: 'name', name: 'name', orderable: true, searchable: true },
+                { data: 'email', name: 'email', orderable: true, searchable: true },
+                { data: 'roles', name: 'roles.name', orderable: true, searchable: true },
+                { data: 'action', name: 'action', orderable: false, searchable: false }
+            ],
+            columnDefs: [{
+                    className: 'text-center', 'targets': [ 0, -1, 1 ],
+                },{
+                    visible: false, targets: []
+                }
+            ],
+            orderDefs: [0, 'desc']
+        }, 
+        drawCallback: function(){}
+    });
+
     @if (auth()->user()->canCreateUsers() || auth()->user()->canUpdateUsers())
     let id = '';
-    const UserForm = $('#userModal');
     const validators = {
         name: {
             validators: {
                 notEmpty: {},
                 stringLength:{
-                    min:3,
+                    min: 3,
                 }
             }
         },
@@ -105,7 +138,7 @@
                     regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
                 },
                 stringLength:{
-                    max:50,
+                    max: 50,
                 },
                 remote: {
                     url: `${window.App.APP_ROUTE}/create`,
@@ -115,7 +148,7 @@
                             email: validator.getFieldElements('email').val(),
                         };
                     },
-                    message: 'E-Mail sudah digunakan.',
+                    message: 'That e-mail is already in use',
                     type: 'GET'
                 }
             }
@@ -123,7 +156,7 @@
         roles: {
             validators: {
                 notEmpty: {
-                    message: 'Silakan pilih'
+                    message: 'Please choose roles'
                 },
             }
         }
@@ -148,23 +181,14 @@
                 UserForm.find('.modal').modal('hide');
             });
     });
-    UserForm.find('.modal').on('hidden.bs.modal', function(){
+    UserForm.find('.modal').on('hidden.bs.modal', function() {
         UserForm.find('.modal-title').html('CREATE USER');
         UserForm.find('#name').prop('disabled', false);
         UserForm.find('#email').prop('disabled', false);
         id = '';
     });
     @endif
-    $(document).on('click', '.new-users', function(e){
-        e.preventDefault();
-        @if (auth()->user()->canCreateUsers())
-        UserForm.find('.modal-title').html('CREATE USER');
-        UserForm.attr('action', '/users');
-        UserForm.find('[name="_method"]').val('POST');
-        UserForm.find('.modal').modal('show');
-        @endif
-    });
-    $(document).on('click', '._edit', function(e){
+    $(document).on('click', '._edit', function(e) {
         e.preventDefault();
         @if (auth()->user()->canUpdateUsers())
         UserForm.find('.modal-title').html('EDIT USER');
@@ -176,8 +200,14 @@
                 UserForm.find('[name="_method"]').val('PUT');
                 UserForm.find('#name').val(response.data.data.name).prop('disabled', true);
                 UserForm.find('#email').val(response.data.data.email).prop('disabled', true);
-                if(response.data.data.roles.length > 0) 
-                    UserForm.find('#roles').callSelect2().val(response.data.data.roles[0].id).trigger("change");
+                UserForm.find('#roles').callSelect2({
+                    ajax: true,
+                    url: `${window.App.APP_ROUTE}/roles`,
+                    modal: $('#userModal')
+                }).setValueSelect2({
+                    id: response.data.data.roles[0].id,
+                    text: response.data.data.roles[0].name
+                });
             });
             Axios.catch((error) => {
                 failedResponse(error);
@@ -185,7 +215,8 @@
             });
         @endif
     });
-    $(document).on('click', '._destroy', function(e){
+    
+    $(document).on('click', '._destroy', function(e) {
         e.preventDefault();
         @if (auth()->user()->canDestroyUsers())
         const _this = $(this);

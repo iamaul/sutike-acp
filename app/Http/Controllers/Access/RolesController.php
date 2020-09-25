@@ -17,12 +17,13 @@ class RolesController extends Controller
 
     public function index(RolesRequest $request)
     {
-    	if($request->ajax()){
+    	if ($request->ajax()) {
             return app('datatables')->eloquent($this->roles->ofRoles())
+                ->addColumn('permission', __v().'.access-controls.roles.datatables.permission')
 	            ->addColumn('action', __v().'.access-controls.roles.datatables.action')
                 ->editColumn('name', '{{ ucwords($name) }}')
                 ->editColumn('description', '{{ ucfirst($description) }}')
-	            ->rawColumns(['action'])
+	            ->rawColumns(['action', 'permission'])
 	            ->orderColumns(['name', 'description'], ':column $1')
                 ->addIndexColumn()
 	            ->make(true);
@@ -32,10 +33,10 @@ class RolesController extends Controller
 
     public function create(RolesRequest $request)
     {
-        if($request->ajax()){
-            if(request()->has('id')){
+        if ($request->ajax()) {
+            if (request()->has('id')) {
                 $roles = $this->roles->where('name', request('name'))->where('id', '<>', request('id'))->first();
-            }else{
+            } else {
                 $roles = $this->roles->where(['name' => request('name')])->first();
             }
             return response()->json(
@@ -48,7 +49,7 @@ class RolesController extends Controller
 
     public function store(RolesRequest $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $roles = $this->roles->create($request->all());
             return response()->successResponse(microtime_float(), $roles, 'create role successfully');
         }
@@ -56,7 +57,7 @@ class RolesController extends Controller
 
     public function edit(RolesRequest $request, $id)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $roles = $this->roles->findOrFail($id);
             return response()->successResponse(microtime_float(), $roles);
         }
@@ -64,7 +65,7 @@ class RolesController extends Controller
 
     public function update(RolesRequest $request, $id)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $roles = $this->roles->find($id)->update($request->all());
             return response()->successResponse(microtime_float(), $roles, 'update role successfully');
         }
@@ -72,12 +73,12 @@ class RolesController extends Controller
 
     public function destroy(RolesRequest $request, $id)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $roles = $this->roles->findOrFail($id);
-            if(!$roles || $roles->users->count() > 0){
+            if (!$roles || $roles->users->count() > 0) {
                 return response()->failedResponse(microtime_float(), 'delete roles unsuccessfully');
             }
-            if($roles->destroy($id)){
+            if ($roles->destroy($id)) {
                 return response()->successResponse(microtime_float(), [], 'delete roles successfully');
             }
             return response()->failedResponse(microtime_float(), 'delete roles unsuccessfully');
@@ -86,18 +87,45 @@ class RolesController extends Controller
 
     public function destroyMany(RolesRequest $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $id_can_be_destroy = [];
-            foreach($request->all() as $id){
+            foreach ($request->all() as $id) {
                 $roles = $this->roles->findOrFail($id);
-                if($roles && $roles->users->count() < 1){
+                if ($roles && $roles->users->count() < 1) {
                     array_push($id_can_be_destroy, $id);
                 }
             }
-            if($roles->destroy($id_can_be_destroy)){
+            if ($roles->destroy($id_can_be_destroy)) {
                 return response()->successResponse(microtime_float(), [], 'delete roles successfully');
             }
             return response()->failedResponse(microtime_float(), 'delete roles unsuccessfully');
         }
+    }
+
+    public function select2(RolesRequest $request)
+    {
+        $page = (isset($request->page)?(int)$request->page:1);
+        $limit = (isset($request->limit)?(int)$request->limit:10);
+        $search = (string)($request->search != null?$request->search:null);
+
+        $field_force_roles = $this->roles;
+        if ($search != null) {
+            $field_force_roles = $field_force_roles->where('name', 'like', '%'.$search.'%');
+        }
+        $total = $field_force_roles;
+        $total = $total->count();
+        $field_force_roles = $field_force_roles->paginate($limit, ['id','name'], 'page', $page);
+        $field_force_roles = $field_force_roles->getCollection()->map(function ($value, $key) {
+            return [
+                'id' => $value['id'],
+                'text' => $value['name']
+            ];
+        });
+        $data = [
+            'total_count' => $total,
+            'incomplete_results' => false,
+            'items' => $field_force_roles->toArray(),
+        ];
+        return json_encode($data);
     }
 }

@@ -1,0 +1,66 @@
+ [
+    {
+        "id": "8ea316a4-2190-4988-a07d-7351c50a09fc",
+        "queue": 1,
+        "en_name": "dashboard",
+        "id_name": "beranda",
+        "icon": "fa fa-windows",
+        "route": null,
+        "child": []
+    },
+    {
+        "id": "8ea316a4-3ee5-41cd-b11d-64e4b723212e",
+        "queue": 2,
+        "en_name": "access control",
+        "id_name": "access control",
+        "icon": "fa fa-expeditedssl",
+        "route": "#",
+        "child": [
+            {
+                "id": "8ea316a4-3f7e-469a-98af-21abb470ba98",
+                "queue": 1,
+                "en_name": "roles",
+                "id_name": "peran",
+                "icon": null,
+                "route": "roles",
+                "child": []
+            },
+            {
+                "id": "8ea316a4-4061-4f16-ac81-3043dcef0b1a",
+                "queue": 2,
+                "en_name": "users",
+                "id_name": "pengguna",
+                "icon": "fa fa-users",
+                "route": "users",
+                "child": []
+            },
+            {
+                "id": "8ea316a4-4105-4e24-813e-1f084053c5c6",
+                "queue": 3,
+                "en_name": "access menu",
+                "id_name": "menu akses",
+                "icon": null,
+                "route": "access",
+                "child": []
+            },
+            {
+                "id": "8ea316a4-418f-4e47-9d17-08df114ed4e1",
+                "queue": 4,
+                "en_name": "permissions",
+                "id_name": "hak akses",
+                "icon": null,
+                "route": "permissions",
+                "child": []
+            },
+            {
+                "id": "8ea316a4-4215-4148-b3ff-e0c5f7edbc5d",
+                "queue": 5,
+                "en_name": "menu list",
+                "id_name": "daftar menu",
+                "icon": null,
+                "route": "menu",
+                "child": []
+            }
+        ]
+    }
+]

@@ -23,7 +23,7 @@ class NavigationComposer
         ]);
     }
 
-    private function generateTreeNavigations(array $data = [], string $html = ''){
+    private function generateTreeNavigations(array $data = [], string $html = '') {
         config(['app.locale' => app()->getLocale()]);
         switch (__v()):
             case 'v2':

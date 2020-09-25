@@ -7,10 +7,6 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ str_title() }}</h3>
-                    <div class="box-tools pull-right">
-                        {{ box_collapse('collapse') }}
-                        {{ box_remove('remove') }}
-                    </div>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12"> 
@@ -21,6 +17,7 @@
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Action</th>
+                                    <th>ACL</th>
                                 </tr>
                             </thead>
                         </table>
@@ -58,29 +55,59 @@
 @endsection
 @section('js')
 <script>
-    const Table = $('#roles').callDatatables(
-        [
-            { data: 'id', name: 'id', orderable: true, searchable: false },
-            { data: 'name', name: 'name', orderable: true, searchable: true },
-            { data: 'description', name: 'description', orderable: true, searchable: true },
-            { data: 'action', name: 'action', orderable: false, searchable: false }
-        ],
-        [
-            {
-                responsivePriority: 0,
-                className: 'text-center', 'targets': [ -1, 0 ],
+    const RoleForm = $('#roleModal');
+    const Table = $('#roles').callFullDataTable({
+        buttons: {
+            visible: true,
+            refresh: true,
+            add: {
+                addCallback: function() {
+                    @if (auth()->user()->canCreateRoles())
+                        RoleForm.find('.modal').modal('show');
+                        RoleForm.attr('action', '/roles');
+                        RoleForm.find('[name="_method"]').val('POST');
+                        RoleForm.find('#name').val('').focus();
+                        RoleForm.find('#description').val('');
+                    @endif
+                }
+            },
+            trash: true,
+            export: {
+                advance: false,
+                csv: {
+                    url: ''
+                },
+                pdf: {
+                    url: ''
+                }
             }
-        ], 1, 'asc'
-    );
+        },
+        data: {
+            columns: [
+                { data: 'id', name: 'id', orderable: true, searchable: false },
+                { data: 'name', name: 'name', orderable: true, searchable: true },
+                { data: 'description', name: 'description', orderable: true, searchable: true },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+                { data: 'permission', name: 'permission', orderable: false, searchable: false },
+            ],
+            columnDefs: [{
+                    className: 'text-center', 'targets': [ 0, -1, -2 ],
+                },{
+                    visible: false, targets: []
+                }
+            ],
+            orderDefs: [1, 'asc']
+        }, 
+        drawCallback: function(){}
+    });
     @if (auth()->user()->canCreateRoles() || auth()->user()->canUpdateRoles())
     let id = '';
-    const RoleForm = $('#roleModal');
     const validators = {
         name: {
             validators: {
                 notEmpty: {},
                 stringLength:{
-                    min:3,
+                    min: 3,
                 },
                 remote: {
                     url: `${window.App.APP_ROUTE}/create`,
@@ -90,7 +117,7 @@
                             name: validator.getFieldElements('name').val(),
                         };
                     },
-                    message: 'Name sudah digunakan.',
+                    message: 'That name is already in use',
                     type: 'GET'
                 }
             }
@@ -98,7 +125,7 @@
         description: {
             validators: {
                 stringLength:{
-                    max:225,
+                    max: 225,
                 }
             }
         }
@@ -120,21 +147,13 @@
                 RoleForm.find('.modal').modal('hide');
             });
     });
-    RoleForm.find('.modal').on('hidden.bs.modal', function(){
+    
+    RoleForm.find('.modal').on('hidden.bs.modal', function() {
         RoleForm.find('.modal-title').html('CREATE ROLE'); id = '';
     });
     @endif
-    $(document).on('click', '.new-roles', function(e){
-        e.preventDefault();
-        @if (auth()->user()->canCreateRoles())
-            RoleForm.find('.modal').modal('show');
-            RoleForm.attr('action', '/roles');
-            RoleForm.find('[name="_method"]').val('POST');
-            RoleForm.find('#name').val('').focus();
-            RoleForm.find('#description').val('');
-        @endif
-    });
-    $(document).on('click', '._edit', function(e){
+
+    $(document).on('click', '._edit', function(e) {
         e.preventDefault();
         @if(auth()->user()->canUpdateRoles())
         RoleForm.find('.modal-title').html('EDIT ROLE');
@@ -153,7 +172,8 @@
             });
         @endif
     });
-    $(document).on('click', '._destroy', function(e){
+
+    $(document).on('click', '._destroy', function(e) {
         e.preventDefault();
         @if (auth()->user()->canDestroyRoles())
         const _this = $(this);
@@ -171,7 +191,7 @@
                     $('.content').find('.box').waitMeHide();
                     failedResponse(error);
                 });
-            }else{
+            } else {
                 swal(Label.sweetTextCancel, {
                     icon: 'error',
                 });

@@ -13,14 +13,14 @@ class Request extends FormRequest
      */
     public function authorize()
     {
-        if($this->isMethod('get')){
-            if(auth()->user()->canIndexMenu() || auth()->user()->canShowMenu() || auth()->user()->canEditMenu()) return true;
+        if ($this->isMethod('get')) {
+            if (auth()->user()->canIndexMenu() || auth()->user()->canShowMenu() || auth()->user()->canEditMenu()) return true;
             return false;
-        }elseif($this->isMethod('post')){
-            if(auth()->user()->canStoreMenu()) return true;
+        } else if ($this->isMethod('post')) {
+            if (auth()->user()->canStoreMenu()) return true;
             return false;
-        }elseif($this->isMethod('put') || $this->isMethod('patch')){
-            if(auth()->user()->canUpdateMenu()) return true;
+        } else if ($this->isMethod('put') || $this->isMethod('patch')) {
+            if (auth()->user()->canUpdateMenu()) return true;
             return false;
         }
         return false;
@@ -33,14 +33,15 @@ class Request extends FormRequest
      */
     public function rules()
     {
-        if($this->isMethod('post') || $this->isMethod('put') || $this->isMethod('patch')){
+        if ($this->isMethod('post')) {
+            return [];
+        } else if ($this->isMethod('put') || $this->isMethod('patch')) {
             return [
-                'en_name' => "required|string|max:255|unique:menus,en_name,{$this->menu}",
-                'id_name' => "required|string|max:255|unique:menus,id_name,{$this->menu}",
+                'en_name' => "required|string|max:255|unique:menus,en_name",
+                'id_name' => "required|string|max:255|unique:menus,id_name",
                 'icon' => "string|max:255",
             ];
-        }
-        else{
+        } else {
             return [];
         }
     }

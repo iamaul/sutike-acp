@@ -20,13 +20,8 @@
         </form>
         <ul id="sidebar-menu" class="sidebar-menu" data-widget="tree">
             {{-- <div class="header main-navigation">MAIN NAVIGATION</div> --}}
-            {{ $navigation }}
-            <li class="developer">
-                <a href="mailto:wahyu.dhiraashandy8@gmail.com">
-                    <i class="fa fa-star-o"></i>
-                    <span>Developer</span>
-                </a>
-            </li>
+            {{ ! auth()->check() ?:$navigation }}
+
         </ul>
     </section>
 </aside>

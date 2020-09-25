@@ -42,14 +42,19 @@ class Role extends LaratrustRole implements InterfaceModel
     {
         $route = app()->make('router');
         return [
-            $route->namespace('Access')->group(function() use ($route){
+            $route->namespace('Access')->group(function() use ($route) {
                 $route->resource('/roles', 'RolesController', [
                     'except' => ['show']
-                ])->middleware(['auth', \App\Models\Permission::getPermission('roles')]);
+                ])->middleware(\App\Models\Permission::getPermission('roles'));
                 $route->delete('/roles', [
                     'as' => 'roles.destroyMany',
                     'uses' => 'RolesController@destroyMany'
-                ])->middleware(['auth']);
+                ]);
+
+                $route->get('/roles/select2', [
+                    'as' => 'roles.select2',
+                    'uses' => 'RolesController@select2'
+                ]);
             }),
         ];
     }
@@ -93,7 +98,7 @@ class Role extends LaratrustRole implements InterfaceModel
      */
     public function roleGiveMenu($value)
     {
-        if(self::isUuid($value)){
+        if (self::isUuid($value)) {
             return $this->menus()->attach(Menu::findOrFail($value));
         }
         return false;
@@ -107,7 +112,7 @@ class Role extends LaratrustRole implements InterfaceModel
      */
     public function roleRemoveMenu($value)
     {
-        if(self::isUuid($value)){
+        if (self::isUuid($value)) {
             return $this->menus()->detach(Menu::findOrFail($value));
         }
         return false;
@@ -153,6 +158,6 @@ class Role extends LaratrustRole implements InterfaceModel
      */
     public function scopeOfRoles($query)
     {
-        return $query->where('id', '<>', auth()->user()->roles->first()->id)->whereNotIn('name', [config('laravelia.default_role')]);
+        return $query->where('id', '<>', auth()->user()->roles->first()->id)->whereNotIn('name', [get_json_user()['default_role']]);
     }
 }

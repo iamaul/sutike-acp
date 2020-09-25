@@ -37,17 +37,16 @@ class Request extends FormRequest
      */
     public function rules()
     {
-        if($this->isMethod('post')){
+        if ($this->isMethod('post')) {
             return [
-                'name' => "required|string|max:255|unique:roles,name,{$this->role}",
+                'name' => "required|string|max:255|unique:roles,name",
             ];
         }
-        else if($this->isMethod('put') || $this->isMethod('patch')){
+        else if ($this->isMethod('put') || $this->isMethod('patch')) {
             return [
-                'name' => "required|string|max:255|unique:roles,name,{$this->role}",
+                'name' => "required|string|max:255|unique:roles,name",
             ];
-        }
-        else{
+        } else {
             return [];
         }
     }

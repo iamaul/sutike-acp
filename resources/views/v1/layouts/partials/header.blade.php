@@ -12,12 +12,17 @@
         </a>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li>
+                    <a href="javascript:void(0)" class="">{{ __('Asia/Jakarta') }} : 
+                        <span class="default-time-show hidden-xs"></span>
+                    </a>
+                </li>
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">4</span>
+                        <span class="label label-success"><!-- 4 --></span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <!-- <ul class="dropdown-menu">
                         <li class="header">You have 4 messages</li>
                         <li>
                             <ul class="menu">
@@ -36,14 +41,14 @@
                             </ul>
                         </li>
                         <li class="footer"><a href="#">See All Messages</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
+                        <span class="label label-warning"><!-- 10 --></span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <!-- <ul class="dropdown-menu">
                         <li class="header">You have 10 notifications</li>
                         <li>
                             <ul class="menu">
@@ -55,12 +60,12 @@
                             </ul>
                         </li>
                         <li class="footer"><a href="#">View all</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
-                <li class="dropdown tasks-menu">
+                <!-- <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger">9</span>
+                        <span class="label label-danger"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 9 tasks</li>
@@ -85,37 +90,25 @@
                             <a href="#">View all tasks</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ auth()->user()->avatar }}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">{{ ucwords(auth()->user()->name) ?? 'Ken' }}</span>
+                        <span class="hidden-xs">{{ ucwords(auth()->user()->name) ?? 'Magis' }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
                             <img src="{{ auth()->user()->avatar }}" class="img-circle" alt="User Image">
                             <p>
-                                {{ ucwords(auth()->user()->name) ?? 'Ken' }} - {{ ucwords(auth()->user()->roles->first()->name) }}
-                                <small>Verified since {{ carbon()->parse(auth()->user()->created_at)->format('M, Y') }}</small>
-                                <small>{{ auth()->user()->last_login }}</small>
+                                {{ ucwords(auth()->user()->name) ?? 'Magis' }} - {{ ucwords(auth()->user()->roles->first()->name) }}
                             </p>
-                        </li>
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            </div>
+                            <div class="pull-center">
+                                <a href="users/{{auth()->user()->id}}/reset-password" class="btn btn-default btn-flat">Reset</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ route('logout') }}"
@@ -133,11 +126,11 @@
                         <span class="ion-android-expand" {{ tooltip('Fullscreen', 'left') }}></span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#" data-toggle="control-sidebar">
                         <i class="fa fa-gears"></i>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </nav>

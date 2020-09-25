@@ -22,15 +22,15 @@ class AccessController extends Controller
     {
     	$app = app()->getLocale();
     	$roles = $this->roles->ofRoles()->get();
-    	if($request->ajax()){
+    	if ($request->ajax()) {
             $raws = [];
     		foreach ($roles as $key => $value) {
         		array_push($raws, "action_{$key}");
         	}
             $datatables = app('datatables')->eloquent($this->navigation->query());
 	            foreach ($roles as $key => $v) {
-	            	$datatables->addColumn("action_{$key}", function($query) use ($key, $v){
-		            	if($v->hasMenu($query->id)){
+	            	$datatables->addColumn("action_{$key}", function($query) use ($key, $v) {
+		            	if ($v->hasMenu($query->id)) {
 			            	return '<div class="checkbox icheck">
 		                        <label>
 		                            <input type="checkbox" name="checkbox" id="checkbox" class="checkbox" checked="checked" data-roles='.$v->id.' data-permissions='.$query->id.'>
@@ -44,9 +44,9 @@ class AccessController extends Controller
 	                    </div>';
 		            });
 	            }
-                $datatables->editColumn(app()->getLocale().'_name', function($q){
+                $datatables->editColumn(app()->getLocale().'_name', function($q) {
                 	$app = app()->getLocale();
-                	return ucwords($q->{"{$app}_name"});
+                	return strtoupper($q->{"{$app}_name"});
                 });
 	            $datatables->rawColumns($raws);
 	            $datatables->orderColumns([app()->getLocale().'_name'], ':column $1');
@@ -61,13 +61,13 @@ class AccessController extends Controller
 
     public function store(MenuRequest $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
         	$role = $this->roles->findOrFail(request('roles'));
-            if(!$role) return response()->failedResponse(microtime_float());
-    	    if(request('status') == true){
+            if (!$role) return response()->failedResponse(microtime_float());
+    	    if (request('status') == true) {
     	    	$role->roleGiveMenu(request('permissions'));
     	    	$message = 'attach access successfully';
-    	    }else{
+    	    } else {
     	    	$role->roleRemoveMenu(request('permissions'));
     	    	$message = 'dettach access successfully';
     	    }

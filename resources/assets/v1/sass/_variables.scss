@@ -1,0 +1,106 @@
+@font-face {
+    font-family: Titillium Web;
+    src: url('fonts/vendor/Titillium/TitilliumWeb-Regular.ttf'); /* IE9 Compat Modes */
+    src: url('fonts/vendor/Titillium/TitilliumWeb-Regular.ttf?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/vendor/Titillium/TitilliumWeb-Regular.ttf') format('ttf'), /* Super Modern Browsers */
+       url('fonts/vendor/Titillium/TitilliumWeb-Regular.ttf') format('ttf'), /* Pretty Modern Browsers */
+       url('fonts/vendor/Titillium/TitilliumWeb-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/vendor/Titillium/TitilliumWeb-Regular.ttf#svgFontName') format('svg'); /* Legacy iOS */
+}
+@font-face {
+    font-family: Titillium Web;
+    font-weight: bold;
+    src: url('fonts/vendor/Titillium/TitilliumWeb-Bold.ttf'); /* IE9 Compat Modes */
+    src: url('fonts/vendor/Titillium/TitilliumWeb-Bold.ttf?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/vendor/Titillium/TitilliumWeb-Bold.ttf') format('ttf'), /* Super Modern Browsers */
+       url('fonts/vendor/Titillium/TitilliumWeb-Bold.ttf') format('ttf'), /* Pretty Modern Browsers */
+       url('fonts/vendor/Titillium/TitilliumWeb-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/vendor/Titillium/TitilliumWeb-Bold.ttf#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Titillium Web', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$white          : #FFFFFF;
+$black          : #2D354A;
+$dark_light     : #3d4e68;
+$blue           : #007BFF;
+$blue_light     : #039BE5;
+$green          : #00D1B2;
+$aqua           : #00B5E3;
+$orange         : #ff5722;
+$purple         : #7F00FF;
+$indigo         : #4A00E0;
+$pink           : #E91E63;
+$fusia          : #C90A6D;
+$teal           : #009689;
+$cyan           : #00BCD4;
+$grey           : #7C8097;
+$red            : #ff4757;
+$red_light      : #ff6b81;
+$yellow         : #FFC107;
+$dark           : #344258;
+$online         : #00b289;
+$code_blue      : #03a6ff;
+$code_blue_light: #018bd6;
+$batman         : #14141f;
+
+$mobile    : 768px; // up to 768px
+$tablet    : 769px; // from 769px
+$desktop   : 1024px; // from 1024px
+$widescreen: 1216px; // from 1216px
+$fullhd    : 1408px; // from 1408px
+
+$mapColors: (
+    'white'          : #FFFFFF,
+    'black'          : #2D354A,
+    'dark_light'     : #546273,
+    'blue'           : #007BFF,
+    'blue_light'     : #039BE5,
+    'green'          : #00D1B2,
+    'aqua'           : #00B5E3,
+    'orange'         : #ff5722,
+    'purple'         : #7F00FF,
+    'indigo'         : #4A00E0,
+    'pink'           : #E91E63,
+    'fusia'          : #C90A6D,
+    'teal'           : #009689,
+    'cyan'           : #00BCD4,
+    'grey'           : #7C8097,
+    'red'            : #DC3545,
+    'red_light'      : #FF7273,
+    'yellow'         : #FFC107,
+    'dark'           : #344258,
+    'online'         : #00b289,
+    'code_blue'      : #03a6ff,
+    'code_blue_light': #018bd6,
+    'batman'         : #14141f
+);
+
+/*primary: '#4A00E0',
+primaryLight: '#7F00FF',
+primaryGradientStart: '#7F00FA',
+primaryGradientEnd: '#7F00FA',
+secondaryGradientStart: '#4A00F0',
+secondaryGradientEnd: '#4A00F0',
+profileGradientStart: '#54CBF6',
+profileGradientEnd: '#49D2D0',
+secondary: '#4A00F0',
+grey: '#2D354A',
+gray: '#7C8097',
+darkGray: '#344258',
+lightGray: '#9b9b9b',
+white: '#ffffff',
+blue: '#007BFF',
+bluish: '#F1F1F7',
+black: '#14141f',
+green: '#00D1B2',
+yellow: '#FFC107',
+red: '#ff4757',
+pink: '#ff6b81'*/

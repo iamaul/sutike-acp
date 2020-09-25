@@ -33,20 +33,22 @@ class GenerateUser extends Command
     /**
      * Execute the console command.
      *
+     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @since @version 0.1
      * @return mixed
      */
     public function handle()
     {
         $count_of_user = \App\Models\User::get()->count();
-        if($count_of_user < 1){
+        if ($count_of_user < 1) {
             self::createUser();
-        }else{
+        } else {
             $this->comment("\n");
             $this->error('User is ready');
-            if($this->confirm('Are you sure to reinstall user?')){
+            if ($this->confirm('Are you sure to reinstall user?')) {
                 self::dropUser();
                 self::createUser();
-            }else{
+            } else {
                 exit();
             }
         }
@@ -60,24 +62,32 @@ class GenerateUser extends Command
         $this->info('----------------------------------------------');
         $this->comment("\n");
         $this->line('Please complete following quetions!');
+
         $name = $this->ask('What is your name?');
         $email = $this->ask('What is your email?');
 
-        if(strlen($name) < 3){
+        if (strlen($name) < 3) {
             $this->error('Your name is very short for name of user!');
             exit();
         }
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->error('Email address not valid email!');
             exit();
         }
 
         $password = $this->secret('What is your password?');
 
-        if(strlen($password) < 8){
+        if (strlen($password) < 8) {
             $this->error('Password cannot be less than 8!');
             $this->error('Your password is not secure!');
+            exit();
+        }
+
+        $role = $this->ask('What is default role of application?');
+
+        if (strlen($role) < 3) {
+            $this->error('Role is very short for name of role!');
             exit();
         }
 
@@ -90,27 +100,22 @@ class GenerateUser extends Command
                 'password' => bcrypt($password),
                 'email_verified_at' => carbon()->toDateTimeString()
             ]);
+            set_json_user($email, encrypt($password), $role);
             $this->callSilent('laravelia:menu');
         }
 
         $users = \App\Models\User::all();
-
         $bar = $this->output->createProgressBar(count($users));
-
         $bar->start();
 
         foreach ($users as $user) {
             $bar->advance();
         }
-
         $bar->finish();
 
         $this->comment("\n");
-
         $headers = ['NAME', 'EMAIL', 'AVATAR'];
-        
         $users = \App\Models\User::all(['name', 'email'])->toArray();
-        
         $this->table($headers, $users);
     }
 

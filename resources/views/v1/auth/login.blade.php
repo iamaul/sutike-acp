@@ -10,7 +10,7 @@
             @csrf
             <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
                 <span class="fa fa-envelope form-control-feedback"></span>
-                <input id="email" type="email" class="form-control" name="email" autofocus="true" autocomplete="off" value="{{ app()->environment('staging') ? 'demo@laravelpos.com' : '' }}{{ app()->environment('local') ? 'ken@gmail.com' : '' }}">
+                <input id="email" type="email" class="form-control" name="email" autofocus="true" autocomplete="off">
                 @if ($errors->has('email'))
                     <span class="help-block" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
                 <span class="fa fa-key form-control-feedback"></span>
-                <input id="password" type="password" class="form-control" name="password" value="{{ app()->environment('staging') ? 'password' : '' }}{{ app()->environment('local') ? 'password' : '' }}">
+                <input id="password" type="password" class="form-control" name="password">
                 @if ($errors->has('password'))
                     <span class="help-block" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -37,7 +37,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat primary-btn">Sign In</button>
+                    <button type="submit" class="btn btn-danger btn-block btn-flat ">Sign In</button>
                 </div>
             </div>
         </form>
@@ -49,6 +49,7 @@
             Google+</a>
         </div> --}}
         <a href="{{ route('password.request') }}" class="text-center is-block mt-15">I forgot my password</a><br>
+        version 1.0
         @if (Route::has('register'))
             <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
         @endif
@@ -65,7 +66,7 @@ $(function () {
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' /* optional */
-        }).on('ifChanged', function(e){
+        }).on('ifChanged', function(e) {
             const field = $(this).attr('name');
             Login.formValidation('revalidateField', field);
         });
@@ -104,8 +105,8 @@ $(function () {
         }).catch((e) => {
             Login.parents('#app').waitMeHide();
             fv.resetForm(true);
-            if(e.response.status === 422){
-                if(typeof e.response.data.errors.email !== 'undefined'){
+            if (e.response.status === 422) {
+                if (typeof e.response.data.errors.email !== 'undefined') {
                     danger(e.response.data.errors.email[0]);
                 }
             }
@@ -120,7 +121,7 @@ $(function () {
         loop: false,
     });
     const email = new Typed('#email', {
-        strings: ['yourmail@'+window.App.APP_NAME.replace(/\s/g, '').toLowerCase()+'.com', ''],
+        strings: ['johndoe@sutike.id', ''],
         typeSpeed: 100,
         backSpeed: 30,
         backDelay: 30,

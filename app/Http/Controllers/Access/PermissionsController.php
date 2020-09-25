@@ -20,15 +20,15 @@ class PermissionsController extends Controller
     public function index(PermissionsRequest $request)
     {
     	$roles = $this->roles->ofRoles()->get();
-    	if($request->ajax()){
+    	if ($request->ajax()) {
     		$raws = [];
     		foreach ($roles as $key => $value) {
         		array_push($raws, "action_{$key}");
         	}
             $datatables = app('datatables')->eloquent($this->permissions->ofPermissions()->with('roles'));
 	            foreach ($roles as $key => $v) {
-	            	$datatables->addColumn("action_{$key}", function($query) use ($key, $v){
-	            		if(\DB::table('permission_role')->wherePermissionId($query->id)->whereRoleId($v->id)->first()){
+	            	$datatables->addColumn("action_{$key}", function($query) use ($key, $v) {
+	            		if (\DB::table('permission_role')->wherePermissionId($query->id)->whereRoleId($v->id)->first()) {
 			            	return '<div class="checkbox icheck">
 		                        <label>
 		                            <input type="checkbox" name="checkbox" id="checkbox" class="checkbox" checked="checked" data-roles='.$v->id.' data-permissions='.$query->id.'>
@@ -53,17 +53,28 @@ class PermissionsController extends Controller
 
     public function store(PermissionsRequest $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
         	$role = $this->roles->findOrFail(request('roles'));
-            if(!$role) return response()->failedResponse(microtime_float());
-    	    if(request('status') == true){
-    	    	$role->permissions()->attach([request('permissions')]);
+            if (!$role) return response()->failedResponse(microtime_float());
+    	    if (request('status') == true) {
+                $role->permissions()->attach([request('permissions')]);
+                $role->flushCache();
     	    	$message = 'attach permissions successfully';
-    	    }else{
-    	    	$role->permissions()->detach([request('permissions')]);
+    	    } else {
+                $role->permissions()->detach([request('permissions')]);
+                $role->flushCache();
     	    	$message = 'dettach permissions successfully';
     	    }
     		return response()->successResponse(microtime_float(), [], $message);
         }
     }
+
+    public function show(PermissionsRequest $request, $id)
+    {
+        $roles = $this->roles->where('id', $id)->get();
+        return view("{$this->view}::access-controls.permissions.index", [
+    		'roles' => $roles
+    	]);
+    }
+
 }

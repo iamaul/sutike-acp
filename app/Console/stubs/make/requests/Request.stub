@@ -1,0 +1,53 @@
+<?php
+
+namespace {{DummyNamespace}}Http\Requests\{{DummyClass}};
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class Request extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        if ($this->isMethod('get')) {
+            if (auth()->user()->canIndex{{property}}() || auth()->user()->canCreate{{property}}() || auth()->user()->canEdit{{property}}()) return true;
+            return false;
+        } else if ($this->isMethod('post')) {
+            if (auth()->user()->canStore{{property}}()) return true;
+            return false;
+        } else if ($this->isMethod('put') || $this->isMethod('patch')) {
+            if (auth()->user()->canUpdate{{property}}()) return true;
+            return false;
+        } else if ($this->isMethod('delete')) {
+            if (auth()->user()->canDestroy{{property}}()) return true;
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        if ($this->isMethod('post')) {
+            return [
+                // 'name' => "required|string|max:255|unique:{{Table}},name",
+            ];
+        } else if ($this->isMethod('put') || $this->isMethod('patch')) {
+            return [
+                // 'name' => "required|string|max:255|unique:{{Table}},name",
+            ];
+        } else {
+            return [
+                //
+            ];
+        }
+    }
+}

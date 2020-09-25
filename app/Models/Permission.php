@@ -28,6 +28,15 @@ class Permission extends LaratrustPermission implements InterfaceModel
     public $incrementing = false;
 
     /**
+     * Fields that can be mass assigned.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'index', 'name', 'display_name', 'description',
+    ];
+
+    /**
      * The routes of module permissions.
      *
      * @return void
@@ -36,10 +45,10 @@ class Permission extends LaratrustPermission implements InterfaceModel
     {
         $route = app()->make('router');
         return [
-            $route->namespace('Access')->group(function() use ($route){
+            $route->namespace('Access')->group(function() use ($route) {
                 $route->resource('/permissions', 'PermissionsController', [
-                    'only' => ['index', 'store']
-                ])->middleware(['auth', self::getPermission('permissions')]);
+                    'only' => ['index', 'store', 'show']
+                ])->middleware(self::getPermission('permissions'));
             }),
         ];
     }
@@ -52,15 +61,15 @@ class Permission extends LaratrustPermission implements InterfaceModel
      */
     public static function getPermission($value)
     {
-        if(Schema::hasTable((new static::$__CLASS__)->getTable())){
-            $data = self::whereIndex($value)->get();
-            $permissions = '';
-            foreach($data as $v){
-                $permissions .= "{$v->name}|";
+        if (get_json_user()['production']) {
+            if (Schema::hasTable((new static::$__CLASS__)->getTable())) {
+                $data = self::whereIndex($value)->get();
+                $permissions = '';
+                foreach ($data as $v) $permissions .= "{$v->name}|";
+                return (!empty($permissions) && $data->count() > 0) ? 'permission:' . rtrim($permissions, '|') : 'permission:';
             }
-            return !empty($permissions) ? 'permission:' . rtrim($permissions, '|') : '';
+            return "";
         }
-        return "";
     }
 
     /**

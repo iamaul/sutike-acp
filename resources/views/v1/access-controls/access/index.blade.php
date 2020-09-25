@@ -7,10 +7,6 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ str_title() }}</h3>
-                    <div class="box-tools pull-right">
-                        {{ box_collapse('collapse') }}
-                        {{ box_remove('remove') }}
-                    </div>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12"> 
@@ -110,35 +106,46 @@
 @section('js')
 <script>
     $('.nestable-with-handle').nestable().nestable('expandAll');
-    const Table = $('#access').callDatatables(
-        [
-            { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
-            { data: '{{ app()->getLocale() }}_name', name: '{{ app()->getLocale() }}_name', orderable: true, searchable: true, width: '20%' },
-            @foreach ($roles as $i => $v)
-                { data: 'action_{{ $i }}', name: 'action_{{ $i }}', orderable: false, searchable: false },
-            @endforeach
-        ],
-        [
-            {
-                responsivePriority: 0,
-                className: 'text-center', 'targets': [
-                    @foreach ($roles as $i => $v)
-                        {{ '-'.++$i.',' }}
-                    @endforeach
-                    0
-                ],
-            }
-        ], 1, 'asc'
-    ).on('draw.dt', () => {
-        @if (auth()->user()->canStoreAccess())
-            $('.checkbox').checkboxRequest();
-        @else
-            $('.checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' /* optional */
-            });
-        @endif
+    const Table = $('#access').callFullDataTable({
+        buttons: {
+            visible: true,
+            refresh: true,
+            add: false,
+            trash: false,
+            export: false
+        },
+        data: {
+            columns: [
+                { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
+                { data: '{{ app()->getLocale() }}_name', name: '{{ app()->getLocale() }}_name', orderable: true, searchable: true, width: '20%' },
+                @foreach ($roles as $i => $v)
+                    { data: 'action_{{ $i }}', name: 'action_{{ $i }}', orderable: false, searchable: false },
+                @endforeach
+            ],
+            columnDefs: [{
+                    className: 'text-center', 'targets': [
+                        @foreach ($roles as $i => $v)
+                            {{ '-'.++$i.',' }}
+                        @endforeach
+                        0
+                    ],
+                },{
+                    visible: false, targets: []
+                }
+            ],
+            orderDefs: [1, 'asc']
+        }, 
+        drawCallback: function() {
+            @if (auth()->user()->canStoreAccess())
+                $('.checkbox').checkboxRequest();
+            @else
+                $('.checkbox').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' /* optional */
+                });
+            @endif
+        }
     });
 </script>
 @endsection

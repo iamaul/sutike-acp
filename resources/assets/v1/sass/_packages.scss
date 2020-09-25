@@ -1,0 +1,39 @@
+$material-icons-font-path: '~material-icons/iconfont/';
+/**
+ * NPM CSS
+ */
+@import url('~admin-lte-sass/plugins/iCheck/square/blue.css');
+@import url('~select2/dist/css/select2.css');
+@import url('~@chenfengyuan/datepicker/dist/datepicker.css');
+@import url('~daterangepicker/daterangepicker.css');
+@import url('~izitoast/dist/css/iziToast.css');
+@import url('~datatables.net-bs/css/dataTables.bootstrap.css');
+@import url('~datatables.net-buttons-bs/css/buttons.bootstrap.css');
+@import url('~datatables.net-colreorder-bs/css/colReorder.bootstrap.css');
+@import url('~datatables.net-rowreorder-bs/css/rowReorder.bootstrap.css');
+@import url('~datatables.net-responsive-bs/css/responsive.bootstrap.css');
+@import url('~datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.css');
+@import url('~datatables.net-fixedcolumns-bs/css/fixedColumns.bootstrap.css');
+@import url('~datatables.net-select-bs/css/select.bootstrap.css');
+@import url('~@fortawesome/fontawesome-free/css/all.css');
+
+/**
+ * LOCAL PLUGINS
+ */
+@import './../../plugins/dist/nestable/jquery-nestable.scss';
+@import './../../plugins/dist/waitbox/waitme.sass';
+@import './../../plugins/dist/bootstrap-toggle/css/bootstrap-toggle';
+@import './../../plugins/dist/formValidation/css/formValidation';
+@import './../../plugins/dist/loadingButton/loading';
+
+/**
+ * NPM SASS/SCSS
+ */
+@import '~admin-lte-sass/build/bootstrap/scss/bootstrap';
+@import '~ionicons-npm/scss/ionicons';
+@import '~font-awesome/scss/font-awesome';
+@import '~admin-lte-sass/build/scss/AdminLTE';
+@import '~admin-lte-sass/build/scss/skins/_all-skins';
+@import '~material-icons/css/material-icons';
+@import '~material-icons/iconfont/material-icons.scss';
+@import '~lightgallery.js/src/sass/lightgallery.scss';

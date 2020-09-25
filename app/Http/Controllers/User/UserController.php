@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function index(UserRequest $request)
     {
-    	if($request->ajax()){
+    	if ($request->ajax()) {
             return app('datatables')->eloquent($this->user->ofUser())
                 ->addColumn('roles', function (User $user) {
                     return $user->roles->map(function($roles) {
@@ -34,18 +34,36 @@ class UserController extends Controller
                 ->orderColumns(['name', 'email', 'roles.name'], ':column $1')
                 ->make(true);
         }
-    	return view("{$this->view}::users.widget", [
+    	return view("{$this->view}::users.index", [
             'roles' => $this->roles->ofRoles()->get(),
             'users' => $this->user->ofUser()->paginate(6)
         ]);
     }
 
+    public function resetPass(UserRequest $request, $id)
+    {
+        $data = $this->user->ofUser($id);
+        return view("{$this->view}::users.resetPassword", ['data' => $data]);
+    }
+
+
+    public function updatePass(UserRequest $request, $id)
+    {   
+        $user = $this->user->findOrFail($id);
+        if ($request->ajax()) {       
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return response()->successResponse(microtime_float(), $user, 'update Password successfully');
+        }
+    }
+
+
     public function create(UserRequest $request)
     {
-        if($request->ajax()){
-            if(request()->has('id')){
+        if ($request->ajax()) {
+            if (request()->has('id')) {
                 $user = $this->user->where('email', request('email'))->where('id', '<>', request('id'))->first();
-            }else{
+            } else {
                 $user = $this->user->where(['email' => request('email')])->first();
             }
             return response()->json(
@@ -58,20 +76,20 @@ class UserController extends Controller
 
     public function show(UserRequest $request, $load)
     {
-        if($request->ajax()){
-            $result = $this->{$load}->select("id","name as text")->where("name", 'LIKE', "{$request->get('query')}%")->where('name', '!=', 'owner')->get();
+        if ($request->ajax()) {
+            $result = $this->{$load}->select("id","name as text")->where("name", 'LIKE', "{$request->get('query')}%")->where('name', '!=', get_json_user()['default_role'])->get();
             return response()->successResponse(microtime_float(), $result);
         }
     }
 
     public function store(UserRequest $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $user = $this->user->create(
                 collect($request->all())->merge(
                     [
                         'email_verified_at' => carbon()->today()->toDateTimeString(),
-                        'password' => bcrypt('Larav3lP0s')
+                        'password' => bcrypt($request->password)
                     ]
                 )->toArray()
             );
@@ -82,7 +100,7 @@ class UserController extends Controller
 
     public function edit(UserRequest $request, $id)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $data = $this->user->ofUser($id);
             return response()->successResponse(microtime_float(), $data);
         }
@@ -90,10 +108,14 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $user = $this->user->findOrFail($id);
             $role = $this->roles->findOrFail($request->roles);
-            if(!$user || !$role) return response()->failedResponse(microtime_float());
+            if (!$user || !$role) return response()->failedResponse(microtime_float());
+            if ($request->password != '') {
+                $user->password = bcrypt($request->password);
+            }
+            $user->save();
             $user->syncRoles([]);
             $user->attachRole($role);
             return response()->successResponse(microtime_float(), $user, 'update user successfully');
@@ -102,8 +124,8 @@ class UserController extends Controller
 
     public function destroy(UserRequest $request, $id)
     {
-        if($request->ajax()){
-            if($this->user->destroy($id)){
+        if ($request->ajax()) {
+            if ($this->user->destroy($id)) {
                 return response()->successResponse(microtime_float(), [], 'delete user successfully');
             }
             return response()->failedResponse(microtime_float(), 'delete user unsuccessfully');
@@ -112,15 +134,13 @@ class UserController extends Controller
 
     public function destroyMany(UserRequest $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $id_can_be_destroy = [];
-            foreach($request->all() as $id){
+            foreach ($request->all() as $id) {
                 $user = $this->user->findOrFail($id);
-                if($user){
-                    array_push($id_can_be_destroy, $id);
-                }
+                if($user) array_push($id_can_be_destroy, $id);
             }
-            if($user->destroy($id_can_be_destroy)){
+            if ($user->destroy($id_can_be_destroy)) {
                 return response()->successResponse(microtime_float(), [], 'delete user successfully');
             }
             return response()->failedResponse(microtime_float(), 'delete user unsuccessfully');

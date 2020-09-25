@@ -1,0 +1,29 @@
+$key           : 'dark';
+$base           : $dark_light;
+$baseColor      : $white;
+$sidebar        : $dark;
+$sidebarHover   : $dark_light;
+$dotOnline      : $green;
+$developerLeft  : $indigo;
+$developerRight : $purple;
+$from           : $dark;
+$to             : $base;
+$shadowLoginPage: 0 3px 150px rgba(0,0,0,0.3);
+$shadowNavbar   : 0 3px 50px rgba(0,0,0,0.3);
+$shadowSidebar  : 0 0px 5px rgba(0,0,0,0.3);
+
+@include themes(
+	$key,
+	$base,
+	$baseColor,
+	$sidebar,
+	$sidebarHover,
+	$dotOnline,
+	$developerLeft,
+	$developerRight,
+	$from,
+	$to,
+	$shadowLoginPage,
+	$shadowNavbar,
+	$shadowSidebar
+);

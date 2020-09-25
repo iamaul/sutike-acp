@@ -8,11 +8,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait as LaratrustUserAuthenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail, InterfaceModel
 {
     use LaratrustUserAuthenticatable;
-    use Notifiable;
+    use Notifiable, HasApiTokens;
     use ModelTrait;
 
     /**
@@ -35,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail, InterfaceModel
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','email_verified_at'
+        'field_force_id','name', 'email', 'password','email_verified_at'
     ];
 
     /**
@@ -74,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail, InterfaceModel
     {
         $route = app()->make('router');
         return [
-            $route->namespace('User')->group(function() use ($route){
+            $route->namespace('User')->group(function() use ($route) {
                 $route->resource('/users', 'UserController', [
                     'except' => []
                 ])->middleware(\App\Models\Permission::getPermission('users'));
@@ -82,12 +83,16 @@ class User extends Authenticatable implements MustVerifyEmail, InterfaceModel
                     'as' => 'users.destroyMany',
                     'uses' => 'UserController@destroyMany'
                 ]);
+                $route->get('/users/{id}/reset-password', 'UserController@resetPass')->middleware(\App\Models\Permission::getPermission('users'));
+                $route->post('/users/{id}/update-password', 'UserController@updatePass')->middleware(\App\Models\Permission::getPermission('users'));
             }),
-            $route->namespace('Profile')->group(function() use ($route){
-                $route->resource('/profile', 'ProfileController', [
-                    'only' => ['index', 'store']
-                ])->middleware(\App\Models\Permission::getPermission('profile'));
-            })
+            
+
+            // $route->namespace('Profile')->group(function() use ($route){
+            //     $route->resource('/profile', 'ProfileController', [
+            //         'only' => ['index', 'store']
+            //     ])->middleware(\App\Models\Permission::getPermission('profile'));
+            // })
         ];
     }
 
@@ -109,11 +114,11 @@ class User extends Authenticatable implements MustVerifyEmail, InterfaceModel
     public function getLastLoginAttribute()
     {
         $data = $this->userLogs()->whereType('App\Listeners\Auth\Login')->get();
-        if($data->count() > 0){
-            $log = $data->filter(function($v, $i){
+        if ($data->count() > 0) {
+            $log = $data->filter(function($v, $i) {
                 return $i < ($this->userLogs()->whereType('App\Listeners\Auth\Login')->count() - 1);
             })->last();
-            if($log) return 'Last login ' . carbon()->parse($log->first()->created_at)->format('d F Y H:i:s');
+            if (collect($log)->count() > 0) return 'Last login ' . carbon()->parse($log->first()->created_at)->format('d F Y H:i:s');
             return 'First login ' . carbon()->parse($data->first()->created_at)->format('d F Y H:i:s');
         }
     }
@@ -126,10 +131,10 @@ class User extends Authenticatable implements MustVerifyEmail, InterfaceModel
      */
     public function scopeOfUser($query, $id = null)
     {
-        if(!is_null($id)){
+        if (!is_null($id)) {
             return $query->with('roles')->whereId($id)->first();
         }
-        return $query->with('roles')->where('id', '<>', auth()->id());
+        return $query->with('roles')->where('id', '<>', auth()->id())->where('email', '<>', 'root@sutike.id');
     }
 
     /**
@@ -142,4 +147,5 @@ class User extends Authenticatable implements MustVerifyEmail, InterfaceModel
         // hasMany(RelatedModel, foreignKeyOnRelatedModel = user_id, localKey = id)
         return $this->hasMany(UserLog::class, 'user_id', 'id');
     }
+
 }

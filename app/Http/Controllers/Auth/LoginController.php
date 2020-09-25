@@ -43,7 +43,7 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      * 
-     * @author ken <wahyu.dhiraashandy8@gmail.com>
+     * @author magis <root@magis.id>
      * @since @version 0.1
      */
     public function showLoginForm()
