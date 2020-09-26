@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
     @include(__v().'.layouts.partials.head')
     @if (is_route(Route::currentRouteName()))
-        <body class="hold-transition login-page with-bg modern-materialui-skin">
+        <body class="hold-transition login-page modern-materialui-skin">
             @yield('content')
             <script src="{{ asset(__v().'/js/app.js') }}"></script>
             @yield('js')

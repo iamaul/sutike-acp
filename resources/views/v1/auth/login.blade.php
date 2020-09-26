@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember me
                         </label>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             <a href="{{ action('Api\oAuthController@redirectToProvider', ['provider' => 'google']) }}" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
             Google+</a>
         </div> --}}
-        <a href="{{ route('password.request') }}" class="text-center is-block mt-15">I forgot my password</a><br>
+        <a href="{{ route('password.request') }}" class="text-center is-block mt-15">Forgot password</a><br>
         version 1.0
         @if (Route::has('register'))
             <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
@@ -98,7 +98,7 @@ $(function () {
             $form.attr('action'), $form.serialize()+'&agree='+$('#agree').is(':checked')
         ).then((r) => {
             @if (app()->environment(['local', 'production']))
-                window.location.reload(true);
+                location.reload();
             @else if(app()->environment('staging'))
                 window.location.href = 'https://demo.laravel-pos.com';
             @endif
