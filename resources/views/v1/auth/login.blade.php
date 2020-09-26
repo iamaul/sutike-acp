@@ -99,8 +99,8 @@ $(function () {
         ).then((r) => {
             @if (app()->environment(['local', 'production']))
                 location.reload();
-            @elseif(app()->environment('staging'))
-                window.location.href = 'https://demo.laravel-pos.com';
+            // @else if(app()->environment('staging'))
+            //     window.location.href = 'https://demo.laravel-pos.com';
             @endif
         }).catch((e) => {
             Login.parents('#app').waitMeHide();
