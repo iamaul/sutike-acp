@@ -98,7 +98,7 @@ $(function () {
             $form.attr('action'), $form.serialize()+'&agree='+$('#agree').is(':checked')
         ).then((r) => {
             @if (app()->environment(['local', 'production']))
-                location.reload();
+                window.location.reload(true);
             @else if(app()->environment('staging'))
                 window.location.href = 'https://demo.laravel-pos.com';
             @endif
