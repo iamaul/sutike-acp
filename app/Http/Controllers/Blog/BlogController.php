@@ -139,7 +139,8 @@ class BlogController extends Controller
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
-                'header_image'  =>  ''  
+                'header_image'  =>  '',
+                'body'      =>  $request->body  
             ]);
 
             if ($request->file('header_image')) {
@@ -222,7 +223,8 @@ class BlogController extends Controller
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
-                'header_image'  => (strlen($current_file) > 1) ? $current_file : ($old_file ? $old_file : null)
+                'header_image'  => (strlen($current_file) > 1) ? $current_file : ($old_file ? $old_file : null),
+                'body'      =>  $request->body
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
         }
