@@ -64,8 +64,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <label for="body" class="control-label">Body <span class="star" style="color:red">*</span></label>
-                                            <textarea id="body" name="body" class="form-control"></textarea>
+                                            <label for="content" class="control-label">Body <span class="star" style="color:red">*</span></label>
+                                            <textarea id="content" name="content" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -151,11 +151,11 @@
     @endif
 
     @if(isset($blog['body']))
-        tinymce.get("body").setContent($blog['body']);
+        tinymce.get("content").setContent($blog['body']);
     @endif
-    
+
     tinymce.init({
-        selector: '#body',
+        selector: '#content',
         height: 300,
         menubar: true,
         plugins: [
@@ -166,8 +166,7 @@
         toolbar: 'undo redo | formatselect | ' +
             'bold italic backcolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help',
-        content_css: '//www.tiny.cloud/css/codepen.min.css'
+            'removeformat | help'
     });
 
     @if(auth()->user()->canUpdateBlogs())

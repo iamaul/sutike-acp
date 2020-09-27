@@ -140,7 +140,7 @@ class BlogController extends Controller
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
                 'header_image'  =>  '',
-                'body'      =>  $request->get('body') 
+                'body'      =>  $request->content
             ]);
 
             if ($request->file('header_image')) {
@@ -224,7 +224,7 @@ class BlogController extends Controller
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
                 'header_image'  => (strlen($current_file) > 1) ? $current_file : ($old_file ? $old_file : null),
-                'body'      =>  $request->body
+                'body'      =>  $request->content
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
         }
