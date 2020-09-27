@@ -111,7 +111,7 @@
     @if(isset($blog['body']))
         tinymce.get("body").setContent($blog['body']);
     @endif
-    
+
     $('#tag_id').select2({
         allowClear: false,
         ajax: {
@@ -236,6 +236,7 @@
         $('form').on('submit', e => {
             e.preventDefault();
             // $('#profile_user_img').hide();
+            console.log($('#body').val());
         });
     @endif
         
