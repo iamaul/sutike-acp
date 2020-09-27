@@ -33,7 +33,7 @@ class BlogTagController extends Controller
     {
         if ($request->ajax()) {
             return app('datatables')->eloquent($this->blog_tags->query())
-                ->addColumn('action', __v().'.blog_tags.datatables.action')
+                ->addColumn('action', __v().'.blog-tags.datatables.action')
                 ->rawColumns(['action'])
                 ->orderColumns([], ':column $1')
                 ->addIndexColumn()
