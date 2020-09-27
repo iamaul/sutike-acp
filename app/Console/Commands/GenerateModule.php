@@ -92,7 +92,7 @@ class GenerateModule extends Command
         $this->callSilent('cache:clear');
         // $this->composer->dumpAutoloads();
         
-        $this->info(Str::studly(Str::singular($name)) . ' scaffolding generated succecsfully.');
+        $this->info(Str::studly(Str::singular($name)) . ' scaffolding generated successfully.');
         $this->comment("\n");
         $this->info('Now, add \\App\\Models\\'. Str::studly(Str::singular($name)) .'::routes(); on web.php');
     }

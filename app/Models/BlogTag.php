@@ -6,11 +6,10 @@ use App\Models\User;
 use App\Service\Contracts\InterfaceModel;
 use App\Service\Traits\Model as ModelTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlogTag extends Model implements InterfaceModel
 {
-    use ModelTrait, SoftDeletes;
+    use ModelTrait;
 
     /**
      * The database table used by the model.
@@ -32,7 +31,8 @@ class BlogTag extends Model implements InterfaceModel
      * @var array
      */
     protected $fillable = [
-        //
+        'name',
+        'slug'
     ];
 
     /**
@@ -76,10 +76,10 @@ class BlogTag extends Model implements InterfaceModel
                     'except' => []
                 ])->middleware(\App\Models\Permission::getPermission('blog-tags'));
                 // Uncomment this if your implement multiple delete resource
-                // $route->delete('/blog-tags', [
-                //     'as' => 'blog-tags.destroyMany',
-                //     'uses' => 'BlogTagController@destroyMany'
-                // ]);
+                $route->delete('/blog-tags', [
+                    'as' => 'blog-tags.destroyMany',
+                    'uses' => 'BlogTagController@destroyMany'
+                ]);
             }),
         ];
     }

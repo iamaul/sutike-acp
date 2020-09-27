@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BlogTag;
 
 use App\Models\BlogTag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogTag\Request as BlogTagRequest;
 
@@ -51,7 +52,14 @@ class BlogTagController extends Controller
      */
     public function create(BlogTagRequest $request)
     {
-        //
+        if ($request->ajax()) {
+            if ($request()->has('id')) {
+                $tag_name = $this->blog_tags->where('name', request('name'))->where('id', '<>', request('id'))->first();
+            } else {
+                $tag_name = $this->blog_tags->where(['name' => request('name')])->first();
+            }
+            return response()->json(['valid' => $tag_name ? false : true ]);
+        }
     }
 
     /**
@@ -65,7 +73,14 @@ class BlogTagController extends Controller
      */
     public function store(BlogTagRequest $request)
     {
-        //
+        if ($request->ajax()) {
+            $tag = new BlogTags([
+                'name'  =>  $request->name,
+                'slug'  =>  Str::slug($request->name, '-')
+            ]);
+            $tag->save();
+            return response()->successResponse(microtime_float(), $tag, 'Blog tag created successfully');
+        }
     }
 
     /**
@@ -93,7 +108,10 @@ class BlogTagController extends Controller
      */
     public function edit(BlogTagRequest $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $tag = $this->blog_tags->findOrFail($id);
+            return response()->successResponse(microtime_float(), $tag);
+        }
     }
 
     /**
@@ -108,7 +126,13 @@ class BlogTagController extends Controller
      */
     public function update(BlogTagRequest $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $tag = $this->blog_tags->find($id)->update([
+                'name'  =>  $request->name,
+                'slug'  =>  Str::slug($request->name, '-')
+            ]);
+            return response()->successResponse(microtime_float(), $tag, 'Blog tag updated successfully');
+        }
     }
 
     /**
@@ -122,7 +146,13 @@ class BlogTagController extends Controller
      */
     public function destroy(BlogTagRequest $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $tag = $this->blog_tags->findOrFail($id);
+            if ($tag->delete()) {
+                return response()->successResponse(microtime_float(), [], 'Blog tag deleted successfully');
+            }
+            return response()->failedResponse(microtime_float(), 'Failed to delete blog tag');
+        }
     }
 
     /**
@@ -142,9 +172,9 @@ class BlogTagController extends Controller
                 if ($blog_tags) array_push($id_can_be_destroy, $id);
             }
             if ($blog_tags->destroy($id_can_be_destroy)) {
-                return response()->successResponse(microtime_float(), [], 'Deleted blog_tags successfully');
+                return response()->successResponse(microtime_float(), [], 'Blog tags deleted successfully');
             }
-            return response()->failedResponse(microtime_float(), 'Deleted blog_tags unsuccessfully');
+            return response()->failedResponse(microtime_float(), 'Failed to delete blog tags');
         }
     }
 }

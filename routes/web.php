@@ -30,6 +30,8 @@ Route::prefix(__prefix())->group(function(){
 		\App\Models\Menu::routes();
 		\App\Models\Role::routes();
 		\App\Models\Permission::routes();
+		\App\Models\BlogTag::routes();
+		\App\Models\Blog::routes();
 
 	});
 

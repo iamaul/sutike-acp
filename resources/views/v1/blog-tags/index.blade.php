@@ -15,12 +15,13 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }}
+                            {{-- {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }} --}}
                             <table id="blog-tags" class="table table-hover dt-responsive nowrap">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
+                                        <th>Slug</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -33,11 +34,12 @@
         </div>
     </div>
 </section>
+@include('v1.blog-tags.form')
 @endsection
 
 @section('js')
 <script>
-    const FormBlogTags = $('#BlogTags');
+    const FormBlogTags = $('#blogTagsModal');
     const Table = $('#blog-tags').callFullDataTable({
         buttons: {
             visible: true,
@@ -46,8 +48,8 @@
                 addCallback: function() {
                     @if (auth()->user()->canCreateBlogTags())
                         FormBlogTags.find('.modal').modal('show');
-                        FormBlogTags.find('.modal-title').html('CREATE USER');
-                        FormBlogTags.attr('action', '/users');
+                        FormBlogTags.find('.modal-title').html('CREATE BLOG TAGS');
+                        FormBlogTags.attr('action', '/blog-tags');
                         FormBlogTags.find('[name="_method"]').val('POST');
                     @endif
                 }
@@ -67,6 +69,7 @@
             columns: [
                 { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
                 { data: 'name', name: 'name', orderable: true, searchable: true },
+                { data: 'slug', name: 'slug', orderable: true, searchable: true },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
             columnDefs: [{
@@ -106,4 +109,5 @@
         @endif
     });
 </script>
+@include('v1.blog-tags.form-js')
 @endsection

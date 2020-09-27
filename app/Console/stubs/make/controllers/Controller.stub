@@ -142,9 +142,9 @@ class {{DummyClass}}Controller extends Controller
                 if (${{property}}) array_push($id_can_be_destroy, $id);
             }
             if (${{property}}->destroy($id_can_be_destroy)) {
-                return response()->successResponse(microtime_float(), [], 'Deleted {{property}} successfully');
+                return response()->successResponse(microtime_float(), [], '{{property}} deleted successfully');
             }
-            return response()->failedResponse(microtime_float(), 'Deleted {{property}} unsuccessfully');
+            return response()->failedResponse(microtime_float(), 'Failed to delete {{property}}');
         }
     }
 }

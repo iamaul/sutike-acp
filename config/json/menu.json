@@ -74,21 +74,31 @@
         ]
     },
     {
-        "id": "91a07042-529c-4702-8aeb-f9cea0d0229f",
+        "id": "50faf72c-5f30-4193-9a2d-8b5d07d3f80d",
         "queue": 5,
-        "en_name": "blogs",
-        "id_name": "blogs",
-        "icon": "fa fa-windows",
-        "route": "blogs",
-        "child": []
-    },
-    {
-        "id": "91a07053-3888-4be7-8802-0bb15e9d8b6c",
-        "queue": 6,
-        "en_name": "blog tags",
-        "id_name": "blog tags",
-        "icon": "fa fa-windows",
-        "route": "blog-tags",
-        "child": []
+        "en_name": "master content",
+        "id_name": "master konten",
+        "icon": "fas fa-pencil-alt",
+        "route": "#",
+        "child": [
+            {
+                "id": "91a07053-3888-4be7-8802-0bb15e9d8b6c",
+                "queue": 1,
+                "en_name": "blog tags",
+                "id_name": "blog tags",
+                "icon": "fa fa-windows",
+                "route": "blog-tags",
+                "child": []
+            },
+            {
+                "id": "91a07042-529c-4702-8aeb-f9cea0d0229f",
+                "queue": 2,
+                "en_name": "blogs",
+                "id_name": "blogs",
+                "icon": "fa fa-windows",
+                "route": "blogs",
+                "child": []
+            }
+        ]
     }
 ]

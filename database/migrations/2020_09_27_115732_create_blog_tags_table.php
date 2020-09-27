@@ -16,12 +16,12 @@ class CreateBlogTagsTable extends Migration
         if (! Schema::hasTable('blog_tags')) {
             Schema::create('blog_tags', function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                // $table->string('name');
+                $table->string('name');
+                $table->string('slug');
                 $table->uuid('created_by')->nullable();
                 $table->uuid('updated_by')->nullable();
                 $table->uuid('deleted_by')->nullable();
                 $table->timestamps();
-                $table->softDeletes();
 
                 $table->foreign('created_by')->references('id')->on('users')
                     ->onUpdate('cascade')->onDelete('restrict');
