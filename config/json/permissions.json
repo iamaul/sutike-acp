@@ -1,0 +1,57 @@
+{
+    "dashboard": [
+        "index-dashboard"
+    ],
+    "users": [
+        "index-users",
+        "create-users",
+        "show-users",
+        "store-users",
+        "edit-users",
+        "update-users",
+        "destroy-users"
+    ],
+    "menu": [
+        "index-menu",
+        "store-menu",
+        "edit-menu",
+        "update-menu"
+    ],
+    "roles": [
+        "index-roles",
+        "create-roles",
+        "show-roles",
+        "store-roles",
+        "edit-roles",
+        "update-roles",
+        "destroy-roles"
+    ],
+    "access": [
+        "index-access",
+        "store-access"
+    ],
+    "permissions": [
+        "index-permissions",
+        "store-permissions"
+    ],
+    "blogs": [
+        "index-blogs",
+        "create-blogs",
+        "show-blogs",
+        "store-blogs",
+        "edit-blogs",
+        "update-blogs",
+        "destroy-blogs",
+        "-blogs"
+    ],
+    "blog-tags": [
+        "index-blog-tags",
+        "create-blog-tags",
+        "show-blog-tags",
+        "store-blog-tags",
+        "edit-blog-tags",
+        "update-blog-tags",
+        "destroy-blog-tags",
+        "-blog-tags"
+    ]
+}

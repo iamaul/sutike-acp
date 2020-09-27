@@ -1,0 +1,94 @@
+[
+    {
+        "id": "91a06d0c-fba9-4c18-895b-ecf9d48fe396",
+        "queue": 1,
+        "en_name": "dashboard",
+        "id_name": "beranda",
+        "icon": "fa fa-windows",
+        "route": null,
+        "child": []
+    },
+    {
+        "id": "91a06d0c-fc19-4014-a8a3-5cd97bfbb475",
+        "queue": 2,
+        "en_name": "users",
+        "id_name": "pengguna",
+        "icon": "fa fa-users",
+        "route": "users",
+        "child": []
+    },
+    {
+        "id": "91a06d0c-fc1e-460a-b543-f2b2f99810b3",
+        "queue": 3,
+        "en_name": "access control",
+        "id_name": "akses kontrol",
+        "icon": "fa fa-expeditedssl",
+        "route": "#",
+        "child": [
+            {
+                "id": "91a06d0d-1a68-48af-865b-0db66cd2cf53",
+                "queue": 1,
+                "en_name": "roles",
+                "id_name": "levels",
+                "icon": null,
+                "route": "roles",
+                "child": []
+            },
+            {
+                "id": "91a06d0d-388f-4897-b2de-41d3a6b90f53",
+                "queue": 2,
+                "en_name": "access",
+                "id_name": "akses",
+                "icon": null,
+                "route": "access",
+                "child": []
+            },
+            {
+                "id": "91a06d0d-56d9-48d0-be92-f7d24a8ff1c6",
+                "queue": 3,
+                "en_name": "permissions",
+                "id_name": "hak akses",
+                "icon": null,
+                "route": "permissions",
+                "child": []
+            }
+        ]
+    },
+    {
+        "id": "91a06d0c-fc22-4f92-a044-44205f667bad",
+        "queue": 4,
+        "en_name": "setting",
+        "id_name": "pengaturan",
+        "icon": "fa fa-cog",
+        "route": "#",
+        "child": [
+            {
+                "id": "91a06d0d-77ac-48ad-9db6-7e9ffbcd549a",
+                "queue": 1,
+                "en_name": "menu",
+                "id_name": "menu",
+                "icon": null,
+                "route": "menu",
+                "child": []
+            }
+        ]
+    },
+    {
+        "id": "91a07042-529c-4702-8aeb-f9cea0d0229f",
+        "queue": 5,
+        "en_name": "blogs",
+        "id_name": "blogs",
+        "icon": "fa fa-windows",
+        "route": "blogs",
+        "child": []
+    },
+    {
+        "id": "91a07053-3888-4be7-8802-0bb15e9d8b6c",
+        "queue": 6,
+        "en_name": "blog tags",
+        "id_name": "blog tags",
+        "icon": "fa fa-windows",
+        "route": "blog-tags",
+        "child": []
+    }
+]

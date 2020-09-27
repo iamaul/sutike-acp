@@ -1,1 +1,14 @@
-[]
+{
+    "user_menu": [
+        "dashboard",
+        "users",
+        "access control",
+        "setting",
+        "roles",
+        "access",
+        "permissions",
+        "menu",
+        "blogs",
+        "blog tags"
+    ]
+}
