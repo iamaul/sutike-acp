@@ -86,7 +86,7 @@
                 "queue": 1,
                 "en_name": "blog tags",
                 "id_name": "blog tags",
-                "icon": "fa fa-windows",
+                "icon": null,
                 "route": "blog-tags",
                 "child": []
             },
@@ -95,7 +95,7 @@
                 "queue": 2,
                 "en_name": "blogs",
                 "id_name": "blogs",
-                "icon": "fa fa-windows",
+                "icon": null,
                 "route": "blogs",
                 "child": []
             }

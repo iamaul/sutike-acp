@@ -3,12 +3,13 @@
         "dashboard",
         "users",
         "access control",
-        "setting",
         "roles",
         "access",
         "permissions",
+        "setting",
         "menu",
-        "blogs",
-        "blog tags"
+        "master content",
+        "blog tags",
+        "blogs"
     ]
 }
