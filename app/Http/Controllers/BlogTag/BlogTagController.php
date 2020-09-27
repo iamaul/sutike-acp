@@ -80,6 +80,7 @@ class BlogTagController extends Controller
             ]);
             return response()->successResponse(microtime_float(), $tag, 'Blog tag created successfully');
         }
+        return response()->failedResponse(microtime_float(), 'Failed to create blog tag');
     }
 
     /**
@@ -94,6 +95,41 @@ class BlogTagController extends Controller
     public function show(BlogTagRequest $request, $id)
     {
         //
+    }
+
+    /**
+     * Show blog tags for select2.
+     */
+    public function select2(BlogTagRequest $request)
+    {
+        $page = (isset($request->page) ? (int)$request->page : 1);
+        $limit = (isset($request->limit) ? (int)$request->limit : 10);
+        $search = (string)($request->search != null ? $request->search : null);
+
+        $tags = $this->blog_tags;
+        if (isset($request->id)) {
+            if ($request->id != "") {
+                $tags = $tags->where('id', '!=', $request->id);
+            }
+        }
+        if ($search != null) {
+            $tags = $tags->where('name', 'like', '%'.$search.'%');
+        }
+        $total = $tags;
+        $total = $total->count();
+        $tags = $tags->paginate($limit, ['id', 'name'], 'page', $page);
+        $tags = $tags->getCollection()->map(function ($value, $key) {
+            return [
+                'id' => $value['id'],
+                'text' => $value['name']
+            ];
+        });
+        $data = [
+            'total_count' => $total,
+            'incomplete_results' => false,
+            'items' => $tags->toArray(),
+        ];
+        return json_encode($data);
     }
 
     /**
@@ -132,6 +168,7 @@ class BlogTagController extends Controller
             ]);
             return response()->successResponse(microtime_float(), $tag, 'Blog tag updated successfully');
         }
+        return response()->failedResponse(microtime_float(), 'Failed to update blog tag');
     }
 
     /**

@@ -72,6 +72,10 @@ class BlogTag extends Model implements InterfaceModel
         $route = app()->make('router');
         return [
             $route->namespace('BlogTag')->group(function() use ($route) {
+                $route->get('/blog-tags/select2', [
+                    'as' => 'blog-tags.select2',
+                    'uses' => 'BlogTagController@select2'
+                ]);
                 $route->resource('/blog-tags', 'BlogTagController', [
                     'except' => []
                 ])->middleware(\App\Models\Permission::getPermission('blog-tags'));

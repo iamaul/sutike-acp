@@ -15,12 +15,16 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }}
+                            {{-- {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }} --}}
                             <table id="blogs" class="table table-hover dt-responsive nowrap">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
+                                        <th>Tag</th>
+                                        <th>Header Image</th>
+                                        <th>Title</th>
+                                        <th>Slug</th>
+                                        <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -45,10 +49,7 @@
             add: {
                 addCallback: function() {
                     @if (auth()->user()->canCreateBlogs())
-                        FormBlogs.find('.modal').modal('show');
-                        FormBlogs.find('.modal-title').html('CREATE USER');
-                        FormBlogs.attr('action', '/users');
-                        FormBlogs.find('[name="_method"]').val('POST');
+                        window.open('{{ url('blogs/create') }}', '_self');
                     @endif
                 }
             },
@@ -66,7 +67,11 @@
         data: {
             columns: [
                 { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
-                { data: 'name', name: 'name', orderable: true, searchable: true },
+                { data: 'tag_name', name: 'tag_name', orderable: true, searchable: true },
+                { data: 'header_image', name: 'header_image', orderable: false, searchable: true },
+                { data: 'title', name: 'title', orderable: true, searchable: true },
+                { data: 'slug', name: 'slug', orderable: true, searchable: true },
+                { data: 'created_at', name: 'created_at', orderable: true, searchable: true },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
             columnDefs: [{

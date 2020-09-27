@@ -6,11 +6,10 @@ use App\Models\User;
 use App\Service\Contracts\InterfaceModel;
 use App\Service\Traits\Model as ModelTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model implements InterfaceModel
 {
-    use ModelTrait, SoftDeletes;
+    use ModelTrait;
 
     /**
      * The database table used by the model.
@@ -32,7 +31,11 @@ class Blog extends Model implements InterfaceModel
      * @var array
      */
     protected $fillable = [
-        //
+        'tag_id',
+        'title',
+        'slug',
+        'header_image',
+        'body'
     ];
 
     /**
