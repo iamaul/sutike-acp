@@ -25,7 +25,7 @@ class NavigationController extends Controller
 
     public function store(MenuRequest $request)
     {
-        if ($request->ajax()) {
+        if($request->ajax()){
             $data = self::create(collect($request->request)->toArray());          
             return response()->successResponse(microtime_float(), $data, 'update navigation succesfully.');
         }
@@ -33,7 +33,7 @@ class NavigationController extends Controller
 
     public function edit(MenuRequest $request, $id)
     {
-        if ($request->ajax()) {
+        if($request->ajax()){
             $data = $this->menu->find($id);
             return response()->successResponse(microtime_float(), $data, 'find a navigation succesfully.');
         }
@@ -41,7 +41,7 @@ class NavigationController extends Controller
 
     public function update(MenuRequest $request, $id)
     {
-        if ($request->ajax()) {
+        if($request->ajax()){
             $data = $this->menu->find($id)->update($request->all());   
             set_json_menu();
             return response()->successResponse(microtime_float(), $data, 'update a navigation succesfully.');
