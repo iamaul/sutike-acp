@@ -18,8 +18,27 @@
         "child": []
     },
     {
+        "id": "91a06d0c-fc22-4f92-a044-44205f667bad",
+        "queue": 5,
+        "en_name": "setting",
+        "id_name": "pengaturan",
+        "icon": "fa fa-cog",
+        "route": "#",
+        "child": [
+            {
+                "id": "91a06d0d-77ac-48ad-9db6-7e9ffbcd549a",
+                "queue": 1,
+                "en_name": "menu",
+                "id_name": "menu",
+                "icon": null,
+                "route": "menu",
+                "child": []
+            }
+        ]
+    },
+    {
         "id": "91a06d0c-fc1e-460a-b543-f2b2f99810b3",
-        "queue": 3,
+        "queue": 4,
         "en_name": "access control",
         "id_name": "akses kontrol",
         "icon": "fa fa-expeditedssl",
@@ -55,41 +74,13 @@
         ]
     },
     {
-        "id": "91a06d0c-fc22-4f92-a044-44205f667bad",
-        "queue": 4,
-        "en_name": "setting",
-        "id_name": "pengaturan",
-        "icon": "fa fa-cog",
-        "route": "#",
-        "child": [
-            {
-                "id": "91a06d0d-77ac-48ad-9db6-7e9ffbcd549a",
-                "queue": 1,
-                "en_name": "menu",
-                "id_name": "menu",
-                "icon": null,
-                "route": "menu",
-                "child": []
-            }
-        ]
-    },
-    {
         "id": "50faf72c-5f30-4193-9a2d-8b5d07d3f80d",
-        "queue": 5,
-        "en_name": "master content",
-        "id_name": "master konten",
+        "queue": 3,
+        "en_name": "master blog",
+        "id_name": "master blog",
         "icon": "fas fa-pencil-alt",
         "route": "#",
         "child": [
-            {
-                "id": "91a07053-3888-4be7-8802-0bb15e9d8b6c",
-                "queue": 1,
-                "en_name": "blog tags",
-                "id_name": "blog tags",
-                "icon": null,
-                "route": "blog-tags",
-                "child": []
-            },
             {
                 "id": "91a07042-529c-4702-8aeb-f9cea0d0229f",
                 "queue": 2,
@@ -97,6 +88,15 @@
                 "id_name": "blogs",
                 "icon": null,
                 "route": "blogs",
+                "child": []
+            },
+            {
+                "id": "91a07053-3888-4be7-8802-0bb15e9d8b6c",
+                "queue": 1,
+                "en_name": "tags",
+                "id_name": "tags",
+                "icon": "null",
+                "route": "blog-tags",
                 "child": []
             }
         ]
