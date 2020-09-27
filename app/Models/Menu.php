@@ -47,12 +47,12 @@ class Menu extends Model implements InterfaceModel
     {
         $route = app()->make('router');
         return [
-            $route->namespace('Access')->group(function() use ($route) {
+            $route->namespace('Access')->group(function() use ($route){
                 $route->resource('/access', 'AccessController', [
                     'only' => ['index', 'store']
                 ])->middleware(\App\Models\Permission::getPermission('access'));
             }),
-            $route->namespace('Setting')->group(function() use ($route) {
+            $route->namespace('Setting')->group(function() use ($route){
                 $route->resource('/menu', 'NavigationController', [
                  'except' => ['show', 'destroy']
                 ])->middleware(\App\Models\Permission::getPermission('menu'));
