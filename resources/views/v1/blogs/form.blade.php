@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="body" class="control-label">Body <span class="star" style="color:red">*</span></label>
-                                            <textarea name="body" class="form-control tinymce-editor"></textarea>
+                                            <textarea id="body" name="body" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@
     @endif
 
     tinymce.init({
-        selector: 'textarea.tinymce-editor',
+        selector: '#body',
         height: 300,
         menubar: true,
         plugins: [
@@ -234,5 +234,10 @@
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help'
     });
+
+    @if(isset($blog['body']))
+        tinymce.get("body").setContent($blog['body']);
+    @endif
+        
 </script>
 @endsection
