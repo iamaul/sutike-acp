@@ -88,7 +88,7 @@ class BlogController extends Controller
                 ]
             ]);
 
-            // $blogs = $blogs->groupBy('blogs.id')->groupBy(\DB::raw('DATE_FORMAT(FROM_UNIXTIME(blogs.created_at), "%Y-%m-%d")'));
+            $blogs = $blogs->groupBy('blogs.id')->groupBy(\DB::raw('DATE_FORMAT(blogs.created_at, "%Y-%m-%d")'));
             $blogs = $blogs->select($select_query);
 
             // pagination model data
