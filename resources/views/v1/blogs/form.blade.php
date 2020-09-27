@@ -93,25 +93,6 @@
 <script>
     const BlogsForm = $('#blogs-form');
 
-    tinymce.init({
-        selector: '#body',
-        height: 300,
-        menubar: true,
-        plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
-        ],
-        toolbar: 'undo redo | formatselect | ' +
-            'bold italic backcolor | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help'
-    });
-
-    @if(isset($blog['body']))
-        tinymce.get("body").setContent($blog['body']);
-    @endif
-
     $('#tag_id').select2({
         allowClear: false,
         ajax: {
@@ -168,6 +149,26 @@
         $('#profile_user_img').show();
         $('#header_image').addClass('hidden');
     @endif
+
+    @if(isset($blog['body']))
+        tinymce.get("body").setContent($blog['body']);
+    @endif
+    
+    tinymce.init({
+        selector: '#body',
+        height: 300,
+        menubar: true,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        content_css: '//www.tiny.cloud/css/codepen.min.css'
+    });
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
@@ -236,7 +237,6 @@
         $('form').on('submit', e => {
             e.preventDefault();
             // $('#profile_user_img').hide();
-            console.log($('#body').val());
         });
     @endif
         

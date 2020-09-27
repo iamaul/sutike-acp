@@ -140,7 +140,7 @@ class BlogController extends Controller
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
                 'header_image'  =>  '',
-                'body'      =>  $request->body  
+                'body'      =>  $request->get('body') 
             ]);
 
             if ($request->file('header_image')) {
