@@ -74,11 +74,10 @@ class BlogTagController extends Controller
     public function store(BlogTagRequest $request)
     {
         if ($request->ajax()) {
-            $tag = new BlogTags([
+            $tag = $this->blog_tags->create([
                 'name'  =>  $request->name,
                 'slug'  =>  Str::slug($request->name, '-')
             ]);
-            $tag->save();
             return response()->successResponse(microtime_float(), $tag, 'Blog tag created successfully');
         }
     }
