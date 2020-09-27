@@ -10,7 +10,7 @@
     ])
 
     <div class="form-group">
-        <div class="col-sm-9">
+        <div class="col-sm-6">
             <input type="text" class="form-control" id="name" placeholder="{{ __('Tag Name') }}" 
                 name="name" autocomplete="off">
         </div>

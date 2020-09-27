@@ -53,12 +53,12 @@ class BlogTagController extends Controller
     public function create(BlogTagRequest $request)
     {
         if ($request->ajax()) {
-            if ($request()->has('id')) {
-                $tag_name = $this->blog_tags->where('name', request('name'))->where('id', '<>', request('id'))->first();
+            if (request()->has('id')) {
+                $tags = $this->blog_tags->where('name', request('name'))->where('id', '<>', request('id'))->first();
             } else {
-                $tag_name = $this->blog_tags->where(['name' => request('name')])->first();
+                $tags = $this->blog_tags->where(['name' => request('name')])->first();
             }
-            return response()->json(['valid' => $tag_name ? false : true ]);
+            return response()->json(['valid' => $tags ? false : true ]);
         }
     }
 
