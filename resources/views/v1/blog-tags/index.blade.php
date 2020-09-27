@@ -39,7 +39,7 @@
 
 @section('js')
 <script>
-    const FormBlogTags = $('#blogTagsModal');
+    const FormBlogTags = $('#blog-tagsModal');
     const Table = $('#blog-tags').callFullDataTable({
         buttons: {
             visible: true,
