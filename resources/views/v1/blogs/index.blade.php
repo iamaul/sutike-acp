@@ -24,7 +24,7 @@
                                         <th>Header Image</th>
                                         <th>Title</th>
                                         <th>Slug</th>
-                                        <th>Created At</th>
+                                        {{-- <th>Created At</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -71,7 +71,7 @@
                 { data: 'header_image', name: 'header_image', orderable: false, searchable: true },
                 { data: 'title', name: 'title', orderable: true, searchable: true },
                 { data: 'slug', name: 'slug', orderable: true, searchable: true },
-                { data: 'created_at', name: 'created_at', orderable: true, searchable: true },
+                // { data: 'created_at', name: 'created_at', orderable: true, searchable: true },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
             columnDefs: [{

@@ -43,8 +43,8 @@ class BlogController extends Controller
                 \DB::raw('GROUP_CONCAT(DISTINCT blogs.title) AS title'),
                 \DB::raw('GROUP_CONCAT(DISTINCT blogs.slug) AS slug'),
                 \DB::raw('GROUP_CONCAT(DISTINCT blogs.header_image) AS header_image'),
-                \DB::raw('GROUP_CONCAT(DISTINCT blogs.body) AS body'),
-                \DB::raw('GROUP_CONCAT(DISTINCT blogs.created_at) AS created_at')
+                \DB::raw('GROUP_CONCAT(DISTINCT blogs.body) AS body')
+                // \DB::raw('GROUP_CONCAT(DISTINCT blogs.created_at) AS created_at')
             ];
 
             $order_column = [
@@ -53,8 +53,7 @@ class BlogController extends Controller
                 'title',
                 'slug',
                 'header_image',
-                'body',
-                'created_at'
+                'body'
             ];
             $raw_columns = ['action'];
 
@@ -89,7 +88,7 @@ class BlogController extends Controller
                 ]
             ]);
 
-            $blogs = $blogs->groupBy('blogs.id')->groupBy(\DB::raw('DATE_FORMAT(FROM_UNIXTIME(blogs.created_at), "%Y-%m-%d")'));
+            // $blogs = $blogs->groupBy('blogs.id')->groupBy(\DB::raw('DATE_FORMAT(FROM_UNIXTIME(blogs.created_at), "%Y-%m-%d")'));
             $blogs = $blogs->select($select_query);
 
             // pagination model data
@@ -223,7 +222,7 @@ class BlogController extends Controller
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
-                'header_image'  =>  (strlen($current_file) > 1) ? $current_file : $old_file
+                'header_image'  => (strlen($current_file) > 1) ? $current_file : $old_file ? $old_file : null
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
         }

@@ -161,19 +161,18 @@
             header_image: {
                 validators: {
                     file: {
-                        extension: 'jpg,jpeg',
+                        extension: 'jpg,jpeg,png',
                         type: 'image/jpeg,image/png',
                         message: 'Only jpg, jpeg, and png are allowed',
                         maxSize: 1024000
-                    },
-                    notEmpty: {}
+                    }
                 }
             },
-            header_image_form:{
-                validators: {
-                    notEmpty: {}
-                }
-            },
+            // header_image_form: {
+            //     validators: {
+            //         notEmpty: {}
+            //     }
+            // },
             title: {
                 validators: {
                     notEmpty: {}
