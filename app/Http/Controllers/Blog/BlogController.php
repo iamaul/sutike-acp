@@ -208,17 +208,16 @@ class BlogController extends Controller
             $current_file = Storage::cloud()->put('blogs', file_get_contents($request->file('header_image')), 'public');
             // Old file image
             $old_file = $blog->header_image;
+            $blog->header_image = $current_file;
             Storage::cloud()->delete($old_file);
         }
 
-        if ($request->ajax()) {   
-            $blog->update([
-                'tag_id'    =>  $request->tag_id,
-                'title'     =>  $request->title,
-                'slug'      =>  $slug,
-                'header_image'  => $current_file ? $current_file : $old_file,
-                'body'      =>  $request->body
-            ]);
+        if ($request->ajax()) {
+            $blog->tag_id   =   $request->tag_id;
+            $blog->title    =   $request->title;
+            $blog->slug     =   $slug;
+            $blog->body     =   $request->body;
+            $blog->save();
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
         }
         return response()->failedResponse(microtime_float(), 'Failed to update blog');
