@@ -270,11 +270,11 @@ class BlogController extends Controller
                 $blogs = $this->blogs->findOrFail($id);
                 if ($blogs) {
                     array_push($id_can_be_destroy, $id);
-                    array_push($images, $id->header_image);
-                    Storage::cloud()->delete($images);
+                    array_push($images, $id['header_image']);
                 }
             }
-            if ($blogs->destroy($id_can_be_destroy)) {
+            if ($blogs->destroy($id_can_be_destroy) && count($images) > 1) {
+                Storage::cloud()->delete($images);
                 return response()->successResponse(microtime_float(), [], 'Blogs deleted successfully');
             }
             return response()->failedResponse(microtime_float(), 'Failed to delete blogs');
