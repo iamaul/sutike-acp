@@ -182,10 +182,6 @@ class BlogController extends Controller
     public function edit(BlogRequest $request, $id)
     {
         $blog = $this->blogs->with('blogTags')->find($id);
-        $blog['header_image_name'] = '';
-        if (strpos($blog['header_image'], 'namespace_')) {
-            $blog['header_image_name'] = substr($blog['header_image'], strpos($blog['header_image'], 'namespace_') + 10);
-        }
         $blog['header_imagepath'] = Storage::cloud()->url($blog->header_image);
 
         return view("{$this->view}::blogs.form", ['blog' => $blog]);
@@ -210,12 +206,11 @@ class BlogController extends Controller
         $slug = Str::slug($request->title, '-');
 
         if ($request->file('header_image')) {
-            // Delete old file
-            // Storage::cloud()->delete('blogs/'.$blog->slug.'/'.$blog->header_image_name);
-            Storage::cloud()->delete($blog->header_image_name);
-            // Replace with a new file
-            $current_file = Storage::cloud()->putFile('blogs', $request->file('header_image'), 'public');
-            $old_file = $blog->header_image_name;
+            // New file image
+            $current_file = Storage::cloud()->put('blogs', file_get_contents($request->file('header_image')), 'public');
+            // Old file image
+            $old_file = $blog->header_image;
+            Storage::cloud()->delete($old_file);
         }
 
         if ($request->ajax()) {   
@@ -223,7 +218,7 @@ class BlogController extends Controller
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
-                'header_image'  => (strlen($current_file) > 1) ? $current_file : ($old_file ? $old_file : null),
+                'header_image'  => $current_file,
                 'body'      =>  $request->body
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
