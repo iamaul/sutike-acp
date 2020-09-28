@@ -167,7 +167,7 @@
             editor.on('init', function() {
                 let body = document.getElementById('body').innerHTML = '{{ $blog["body"] }}';
                 @isset($blog['body'])
-                    editor.setContent($body);
+                    editor.setContent(body);
                 @endisset
             });
         }
