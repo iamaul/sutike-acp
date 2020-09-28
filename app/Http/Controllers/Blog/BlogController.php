@@ -216,7 +216,7 @@ class BlogController extends Controller
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
-                'header_image'  => $current_file ? $current_file : $old_file,
+                'header_image'  => $current_file == '' ? $old_file : $current_file,
                 'body'      =>  $request->body
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
