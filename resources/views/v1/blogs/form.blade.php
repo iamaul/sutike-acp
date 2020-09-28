@@ -167,7 +167,6 @@
     @if(isset($blog['body']))
         tinymce.get("body").setContent($blog['body']);
     @endif
-    console.log($('#body').val());
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
@@ -217,7 +216,7 @@
                 formData.append(k[0], decodeURI(k[1]));
             }
             formData.append('header_image', document.getElementById('header_image').files[0]);
-            formData.append('body', $('#body').val());
+            formData.append('body', $('#body').html());
 
             const Axios = axios.post($form.attr('action'), formData, config);
             BlogsForm.waitMeShow();
