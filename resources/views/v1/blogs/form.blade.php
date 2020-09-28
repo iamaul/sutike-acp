@@ -163,13 +163,15 @@
         toolbar: 'undo redo | formatselect | ' +
             'bold italic backcolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help'
+            'removeformat | help',
+        setup: function (editor) {
+            editor.on('init', function (e) {
+                @isset($blog['body'])
+                    editor.setContent('{{ $blog["body"] }}');
+                @endisset
+            });
+        }
     });
-    let body = '{{ $blog["body"] }}';
-    let bodyHTML = document.getElementById('body').innerHTML = body;
-    @isset($blog['body'])
-        tinymce.get('body').setContent(bodyHTML);
-    @endisset
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
