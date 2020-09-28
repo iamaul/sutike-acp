@@ -188,6 +188,7 @@
                         message: 'Only jpg, jpeg, and png are allowed',
                         maxSize: 1024000
                     }
+                    // notEmpty: {}
                 }
             },
             // header_image_form: {
@@ -202,7 +203,7 @@
             },
             body: {
                 validators: {
-                    notEmpty: {},
+                    notEmpty: {}
                 }
             }
         };
