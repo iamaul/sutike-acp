@@ -164,10 +164,11 @@
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help'
     });
-    tinymce.get('body').setContent('{{ $blog["body"] }}');
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
+        let body = document.getElementById('body').value = '{{ isset($blog) ? $blog["body"] : "" }}';
+        tinymce.get('body').setContent($body);
         const validators = {
             tag_id: {
                 validators: {
