@@ -165,9 +165,10 @@
             'removeformat | help',
         setup: function(editor) {
             editor.on('init', function() {
-                let body = document.getElementById('body').innerHTML = '{{ $blog["body"] }}';
+                let body = '{{ $blog["body"] }}';
+                let bodyHTML = document.getElementById('body').innerHTML = body;
                 @isset($blog['body'])
-                    editor.setContent(body);
+                    tinymce.activeEditor.setContent(bodyHTML);
                 @endisset
             });
         }
