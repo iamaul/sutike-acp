@@ -79,10 +79,10 @@ class Blog extends Model implements InterfaceModel
                     'except' => []
                 ])->middleware(\App\Models\Permission::getPermission('blogs'));
                 // Uncomment this if your implement multiple delete resource
-                // $route->delete('/blogs', [
-                //     'as' => 'blogs.destroyMany',
-                //     'uses' => 'BlogController@destroyMany'
-                // ]);
+                $route->delete('/blogs', [
+                    'as' => 'blogs.destroyMany',
+                    'uses' => 'BlogController@destroyMany'
+                ]);
             }),
         ];
     }
@@ -148,5 +148,13 @@ class Blog extends Model implements InterfaceModel
     public function getDeletedAtAttribute($value)
     {
         return carbon()->parse($this->attributes['deleted_at'])->format('d-m-Y');
+    }
+
+    /**
+     * Associate for blog_tags attribute.
+     */
+    public function blogTags()
+    {
+        return $this->belongsTo('App\Models\BlogTag', 'tag_id');
     }
 }

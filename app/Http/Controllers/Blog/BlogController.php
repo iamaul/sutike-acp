@@ -144,7 +144,7 @@ class BlogController extends Controller
             ]);
 
             if ($request->file('header_image')) {
-                $blog->header_image = $request->file('header_image')->store('blogs/'.$slug, 'spaces');
+                $blog->header_image = $request->file('header_image')->store('blogs', 'spaces');
                 Storage::cloud()->setVisibility($blog->header_image, 'public');
             } else {
                 $blog->header_image = null;
@@ -214,7 +214,7 @@ class BlogController extends Controller
             // Storage::cloud()->delete('blogs/'.$blog->slug.'/'.$blog->header_image_name);
             Storage::cloud()->delete($blog->header_image_name);
             // Replace with a new file
-            $current_file = Storage::cloud()->put('blogs/'.$slug, $request->file('header_image'));
+            $current_file = Storage::cloud()->putFile('blogs', $request->file('header_image'), 'public');
             $old_file = $blog->header_image_name;
         }
 
@@ -265,9 +265,14 @@ class BlogController extends Controller
     {
         if ($request->ajax()) {
             $id_can_be_destroy = [];
+            $images = [];
             foreach ($request->all() as $id) {
                 $blogs = $this->blogs->findOrFail($id);
-                if ($blogs) array_push($id_can_be_destroy, $id);
+                if ($blogs) {
+                    array_push($id_can_be_destroy, $id);
+                    array_push($images, $id->header_image);
+                    Storage::cloud()->delete($images);
+                }
             }
             if ($blogs->destroy($id_can_be_destroy)) {
                 return response()->successResponse(microtime_float(), [], 'Blogs deleted successfully');

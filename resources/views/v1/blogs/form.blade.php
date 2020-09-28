@@ -117,7 +117,7 @@
             },
             cache: false
         },
-        placeholder: 'Please choose tags',
+        placeholder: 'Choose tags',
     });
 
     $('#header_image_form').hide();
@@ -150,10 +150,6 @@
         $('#header_image').addClass('hidden');
     @endif
 
-    @if(isset($blog['body']))
-        tinymce.get("body").setContent($blog['body']);
-    @endif
-
     tinymce.init({
         selector: '#body',
         height: 300,
@@ -168,6 +164,9 @@
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help'
     });
+    @if(isset($blog['body']))
+        tinymce.get("body").setContent($blog['body']);
+    @endif
     console.log($('#body').val());
 
     @if(auth()->user()->canUpdateBlogs())
