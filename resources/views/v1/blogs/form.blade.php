@@ -150,6 +150,9 @@
         $('#header_image').addClass('hidden');
     @endisset
 
+    console.log('{{ $blog["header_image_name"] }}');
+    console.log('{{ $blog["header_imagepath"] }}');
+
     tinymce.init({
         selector: '#body',
         height: 300,
