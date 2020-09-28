@@ -273,8 +273,8 @@ class BlogController extends Controller
                     array_push($images, $blogs->header_image);
                 }
             }
-            if (count($images) >= 2) {
-                return response()->failedResponse(microtime_float(), 'Please select multiple items'); 
+            if (count($images) < 2) {
+                return response()->failedResponse(microtime_float(), 'Please select more items'); 
             } else if ($blogs->destroy($id_can_be_destroy)) {
                 Storage::cloud()->delete($images);
                 return response()->successResponse(microtime_float(), [], 'Blogs deleted successfully');
