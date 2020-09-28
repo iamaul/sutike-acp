@@ -164,10 +164,7 @@
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help'
     });
-
-    @isset($blog['body'])
-        tinymce.get('body').setContent('{{ $blog["body"] }}');
-    @endisset
+    tinymce.get('body').setContent('{{ $blog["body"] }}');
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
