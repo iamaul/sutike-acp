@@ -100,7 +100,7 @@ class BlogController extends Controller
                 ->skipPaging()
                 ->setTotalRecords($total)
                 ->setFilteredRecords($total)
-                ->rawColumns(['action'])
+                ->rawColumns(['header_image', 'action'])
                 ->make(true);
         }
         return view("{$this->view}::blogs.index");
