@@ -216,7 +216,10 @@
                 formData.append(k[0], decodeURI(k[1]));
             }
             formData.append('header_image', document.getElementById('header_image').files[0]);
-            formData.append('body', $('#body').html());
+
+            let content = document.getElementById('body').value;
+            let body = document.getElementById('body').innerHTML = content;
+            formData.append('body', body);
 
             const Axios = axios.post($form.attr('action'), formData, config);
             BlogsForm.waitMeShow();
