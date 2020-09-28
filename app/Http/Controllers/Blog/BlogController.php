@@ -270,7 +270,7 @@ class BlogController extends Controller
                 $blogs = $this->blogs->findOrFail($id);
                 if ($blogs) {
                     array_push($id_can_be_destroy, $id);
-                    array_push($images, $id['header_image']);
+                    array_push($images, $blogs->header_image);
                 }
             }
             if ($blogs->destroy($id_can_be_destroy) && count($images) > 1) {
