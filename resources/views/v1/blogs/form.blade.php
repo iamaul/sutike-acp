@@ -31,9 +31,9 @@
                                             <div class="form-group">
                                                 <label for="tag_id" class="control-label">Tag <span class="star" style="color:red">*</span></label>
                                                 <select name="tag_id" id="tag_id">
-                                                    @if (isset($blog->blog_tags))
-                                                        <option value="{{ $blog->blog_tags->id }}" selected>
-                                                            {{ $blog->blog_tags->name }}
+                                                    @if (isset($blog->blogTags))
+                                                        <option value="{{ $blog->blogTags->id }}" selected>
+                                                            {{ $blog->blogTags->name }}
                                                         </option>
                                                     @endif
                                                 </select>
