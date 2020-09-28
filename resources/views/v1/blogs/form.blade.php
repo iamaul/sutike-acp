@@ -166,7 +166,7 @@
         setup: function(editor) {
             editor.on('init', function() {
                 @isset($blog['body'])
-                    tinymce.activeEditor.setContent('{{ $blog["body"] }}', {format: 'html'});
+                    tinymce.activeEditor.setContent('{{ $blog["body"] }}', {format: 'raw'});
                 @endisset
             });
         }
