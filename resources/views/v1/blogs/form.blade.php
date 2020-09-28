@@ -144,11 +144,11 @@
         }
     });
 
-    @if(isset($blog['header_image']))
+    @isset($blog['header_image'])
         $('#header_image_form').show();
         $('#profile_user_img').show();
         $('#header_image').addClass('hidden');
-    @endif
+    @endisset
 
     tinymce.init({
         selector: '#body',
@@ -165,10 +165,9 @@
             'removeformat | help'
     });
 
-    console.log($blog['body']);
-    @if(isset($blog['body']))
+    @isset($blog['body'])
         tinymce.get('body').setContent($blog['body']);
-    @endif
+    @endisset
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
