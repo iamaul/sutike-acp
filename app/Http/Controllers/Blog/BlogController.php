@@ -245,7 +245,7 @@ class BlogController extends Controller
         if ($request->ajax()) {
             $blog = $this->blogs->findOrFail($id);
             // Delete file from cloud storage
-
+            Storage::cloud()->delete($blog->header_image);
             if ($blog->delete()) {
                 return response()->successResponse(microtime_float(), [], 'Blog deleted successfully');
             }

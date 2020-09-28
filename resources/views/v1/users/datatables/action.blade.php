@@ -6,7 +6,7 @@
 		<i class="fa fa-edit"></i>
 	</a>
 	<a href="#" class="btn btn-flat btn-xs btn-danger _destroy" data-id="{{ $id }}"
-		data-toggle="tooltip" data-placement="top" title="Hapus"
+		data-toggle="tooltip" data-placement="top" title="Delete"
 		{{ auth()->user()->canDestroyUsers() ? '' : 'disabled' }}
 	>
 		<i class="fa fa-trash"></i>
