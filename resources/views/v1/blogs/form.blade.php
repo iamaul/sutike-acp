@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="header_image" class="control-label">Header Image <span class="star" style="color:red">*</span></label>
+                                                <label for="header_image" class="control-label">Header Image</label>
                                                 <input type="file" name="header_image" id="header_image" />
                                                 <input type="text" name="header_image_form" id="header_image_form" class="form-control" readonly/>
                                                 <div class="with-bg" style="padding-top: 10px;">
@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="body" class="control-label">Body <span class="star" style="color:red">*</span></label>
-                                            <textarea name="body" class="form-control tinymce-editor"></textarea>
+                                            <textarea id="body" name="body" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@
     @endif
 
     tinymce.init({
-        selector: 'textarea.tinymce-editor',
+        selector: '#body',
         height: 300,
         menubar: true,
         plugins: [
@@ -216,7 +216,7 @@
                 formData.append(k[0], decodeURI(k[1]));
             }
             formData.append('header_image', document.getElementById('header_image').files[0]);
-            formData.append('body', document.getElementsByName('name'));
+            formData.append('body', document.getElementById('body').value);
 
             const Axios = axios.post($form.attr('action'), formData, config);
             BlogsForm.waitMeShow();
