@@ -200,7 +200,6 @@ class BlogController extends Controller
         $blog = $this->blogs->find($id);
 
         $current_file = '';
-        $old_file = '';
         $slug = Str::slug($request->title, '-');
 
         if ($request->file('header_image')) {
@@ -216,7 +215,7 @@ class BlogController extends Controller
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
-                'header_image'  => $current_file == '' ? $old_file : $current_file,
+                'header_image'  => $current_file == '' ? $blog->header_image : $current_file,
                 'body'      =>  $request->body
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
