@@ -167,7 +167,7 @@
         setup: function (editor) {
             editor.on('init', function (e) {
                 @isset($blog['body'])
-                    editor.setContent('{!! $blog["body"] !!}');
+                    editor.setContent('{!! $blog["body"] !!}', { format: 'html' });
                 @endisset
             });
         }
