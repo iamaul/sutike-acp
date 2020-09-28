@@ -165,7 +165,7 @@
             'removeformat | help'
     });
     let body = '{{ isset($blog) ? $blog["body"] : "" }}';
-    let bodyHtml = document.getElementById('body').value = body;
+    let bodyHtml = document.getElementById('body').innerHTML = body;
     tinymce.get('body').setContent(bodyHtml);
 
     @if(auth()->user()->canUpdateBlogs())
