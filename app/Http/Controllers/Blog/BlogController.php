@@ -182,8 +182,6 @@ class BlogController extends Controller
     public function edit(BlogRequest $request, $id)
     {
         $blog = $this->blogs->with('blogTags')->find($id);
-        $blog['header_imagepath'] = Storage::cloud()->url($blog->header_image);
-
         return view("{$this->view}::blogs.form", ['blog' => $blog]);
     }
 
@@ -218,7 +216,7 @@ class BlogController extends Controller
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
                 'slug'      =>  $slug,
-                'header_image'  => $current_file,
+                'header_image'  => $current_file ? $current_file : $old_file,
                 'body'      =>  $request->body
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
