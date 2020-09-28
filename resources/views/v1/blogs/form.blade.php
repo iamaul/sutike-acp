@@ -164,8 +164,10 @@
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help'
     });
+
+    console.log($blog['body']);
     @if(isset($blog['body']))
-        tinymce.get("body").setContent($blog['body']);
+        tinymce.get('body').setContent($blog['body']);
     @endif
 
     @if(auth()->user()->canUpdateBlogs())
