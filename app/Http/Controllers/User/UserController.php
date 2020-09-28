@@ -53,8 +53,9 @@ class UserController extends Controller
         if ($request->ajax()) {       
             $user->password = bcrypt($request->password);
             $user->save();
-            return response()->successResponse(microtime_float(), $user, 'update Password successfully');
+            return response()->successResponse(microtime_float(), $user, 'Password updated successfully');
         }
+        return response()->failedResponse(microtime_float(), 'Failed to update password');
     }
 
 
@@ -94,8 +95,9 @@ class UserController extends Controller
                 )->toArray()
             );
             $user->roles()->attach([$request->roles]);
-            return response()->successResponse(microtime_float(), $user, 'create user successfully');
+            return response()->successResponse(microtime_float(), $user, 'User created successfully');
         }
+        return response()->failedResponse(microtime_float(), 'Failed to create user');
     }
 
     public function edit(UserRequest $request, $id)
@@ -118,17 +120,18 @@ class UserController extends Controller
             $user->save();
             $user->syncRoles([]);
             $user->attachRole($role);
-            return response()->successResponse(microtime_float(), $user, 'update user successfully');
+            return response()->successResponse(microtime_float(), $user, 'User updated successfully');
         }
+        return response()->failedResponse(microtime_float(), 'Failed to update user');
     }
 
     public function destroy(UserRequest $request, $id)
     {
         if ($request->ajax()) {
             if ($this->user->destroy($id)) {
-                return response()->successResponse(microtime_float(), [], 'delete user successfully');
+                return response()->successResponse(microtime_float(), [], 'User deleted successfully');
             }
-            return response()->failedResponse(microtime_float(), 'delete user unsuccessfully');
+            return response()->failedResponse(microtime_float(), 'Failed to delete user');
         }
     }
 
@@ -141,9 +144,9 @@ class UserController extends Controller
                 if($user) array_push($id_can_be_destroy, $id);
             }
             if ($user->destroy($id_can_be_destroy)) {
-                return response()->successResponse(microtime_float(), [], 'delete user successfully');
+                return response()->successResponse(microtime_float(), [], 'Delete users successfully');
             }
-            return response()->failedResponse(microtime_float(), 'delete user unsuccessfully');
+            return response()->failedResponse(microtime_float(), 'Failed to delete users');
         }
     }
 }

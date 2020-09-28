@@ -36,15 +36,14 @@ class BlogController extends Controller
     public function index(BlogRequest $request)
     {
         if ($request->ajax()) {
-            $req_search = (string) ($request->search['value'] != null ? $request->search['value'] : null);
             $select_query = [
-                \DB::raw('GROUP_CONCAT(DISTINCT blogs.id) AS id'),
-                \DB::raw('GROUP_CONCAT(DISTINCT blog_tags.name) AS tag_name'),
-                \DB::raw('GROUP_CONCAT(DISTINCT blogs.title) AS title'),
-                \DB::raw('GROUP_CONCAT(DISTINCT blogs.slug) AS slug'),
-                \DB::raw('GROUP_CONCAT(DISTINCT blogs.header_image) AS header_image'),
-                \DB::raw('GROUP_CONCAT(DISTINCT blogs.body) AS body')
-                // \DB::raw('GROUP_CONCAT(DISTINCT blogs.created_at) AS created_at')
+                'blogs.id AS id',
+                'blog_tags.name AS tag_name',
+                'blogs.title AS title',
+                'blogs.slug AS slug',
+                'blogs.header_image AS header_image',
+                'blogs.body AS body'
+                // 'blogs.created_at AS created_at'
             ];
 
             $order_column = [
@@ -57,8 +56,9 @@ class BlogController extends Controller
             ];
             $raw_columns = ['action'];
 
-            $blogs = $this->blogs->leftJoin('blog_tags', 'blogs.tag_id', '=', 'blog_tags.id');
+            $blogs = $this->blogs->leftJoin('blog_tags', 'blogs.tag_id', '=', 'blog_tags.id')->select_query($select_query);
 
+            $req_search = (string) ($request->search['value'] != null ? $request->search['value'] : null);
             if ($req_search) {
                 $blogs = $blogs
                     ->where('blog_tags.name','like', '%'.$req_search.'%')
@@ -88,8 +88,7 @@ class BlogController extends Controller
                 ]
             ]);
 
-            $blogs = $blogs->groupBy('blogs.id');
-            $blogs = $blogs->select($select_query);
+            // $blogs = $blogs->select($select_query);
 
             // pagination model data
             $blogs = $blogs->paginate($limit, $select_query, 'page', $page);
@@ -98,8 +97,8 @@ class BlogController extends Controller
             return Datatables::of($blogs)
                 ->addColumn('action', __v().'.blogs.datatables.action')
                 ->skipPaging()
-                ->setTotalRecords($counter)
-                ->setFilteredRecords($counter)
+                ->setTotalRecords($total)
+                ->setFilteredRecords($total)
                 ->rawColumns(['action'])
                 ->make(true);
         }
@@ -270,7 +269,7 @@ class BlogController extends Controller
                 if ($blogs) array_push($id_can_be_destroy, $id);
             }
             if ($blogs->destroy($id_can_be_destroy)) {
-                return response()->successResponse(microtime_float(), [], 'Deleted blogs successfully');
+                return response()->successResponse(microtime_float(), [], 'Blogs deleted successfully');
             }
             return response()->failedResponse(microtime_float(), 'Failed to delete blogs');
         }
