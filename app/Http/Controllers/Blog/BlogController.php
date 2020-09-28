@@ -56,7 +56,7 @@ class BlogController extends Controller
             ];
             $raw_columns = ['action'];
 
-            $blogs = $this->blogs->leftJoin('blog_tags', 'blogs.tag_id', '=', 'blog_tags.id')->select_query($select_query);
+            $blogs = $this->blogs->leftJoin('blog_tags', 'blogs.tag_id', '=', 'blog_tags.id')->select($select_query);
 
             $req_search = (string) ($request->search['value'] != null ? $request->search['value'] : null);
             if ($req_search) {
