@@ -49,7 +49,8 @@
                                                         id="profile_user_img"
                                                         name="profile_user_img"
                                                         class="profile-user-img"
-                                                        src="{{ auth()->user()->userable->avatar ?? 'https://www.gravatar.com/avatar/'.md5(strtolower(auth()->user()->email)).'.jpg?s=200&d=mm' }}"
+                                                        src="{{ isset($blog['header_image']) ? Storage::cloud()->url($blog['header_image']) : 
+                                                            auth()->user()->userable->avatar ?? 'https://www.gravatar.com/avatar/'.md5(strtolower(auth()->user()->email)).'.jpg?s=200&d=mm' }}"
                                                         alt="header_image"
                                                     >
                                                 </div>
@@ -149,9 +150,6 @@
         $('#profile_user_img').show();
         $('#header_image').addClass('hidden');
     @endisset
-
-    console.log('{{ $blog["header_image_name"] }}');
-    console.log('{{ $blog["header_imagepath"] }}');
 
     tinymce.init({
         selector: '#body',
