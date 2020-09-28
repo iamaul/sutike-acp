@@ -91,158 +91,160 @@
 
 <script src="https://cdn.tiny.cloud/1/{{ env('TINYMCE_API_KEY') }}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-    const BlogsForm = $('#blogs-form');
+    $(document).ready(function() {
+        const BlogsForm = $('#blogs-form');
 
-    $('#tag_id').select2({
-        allowClear: false,
-        ajax: {
-            url: "{{ route('blog-tags.select2') }}",
-            dataType: 'JSON',
-            delay: 0,
-            data: function (params) {
-                return {
-                    search: params.term,
-                    page: params.page,
-                    limit: 20
-                };
+        $('#tag_id').select2({
+            allowClear: false,
+            ajax: {
+                url: "{{ route('blog-tags.select2') }}",
+                dataType: 'JSON',
+                delay: 0,
+                data: function (params) {
+                    return {
+                        search: params.term,
+                        page: params.page,
+                        limit: 20
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 20) < data.total_count
+                        }
+                    };
+                },
+                cache: false
             },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-                return {
-                    results: data.items,
-                    pagination: {
-                        more: (params.page * 20) < data.total_count
-                    }
-                };
-            },
-            cache: false
-        },
-        placeholder: 'Choose tags',
-    });
-
-    $('#header_image_form').hide();
-    $('.profile_user_img').hide();
-
-    BlogsForm.on('click', '#header_image_form', function() {
-        $('input[name="header_image"]').click();
-    });
-
-    BlogsForm.on('change', 'input[name="header_image"]', function() {
-        $('#profile_user_img').show();
-        var preview = document.querySelector('#profile_user_img');
-        var file    = document.querySelector('input[type=file]').files[0];
-        var reader  = new FileReader();
-        BlogsForm.find('#header_image_form').val(document.querySelector('input[type=file]').files[0].name);
-        reader.onloadend = function () { preview.src = reader.result; }
-
-        if (file) {
-            reader.readAsDataURL(file);
-            console.log(file);
-            console.log($('#header_image').val());
-        } else {
-            preview.src = '';
-        }
-    });
-
-    @isset($blog['header_image'])
-        $('#header_image_form').show();
-        $('#profile_user_img').show();
-        $('#header_image').addClass('hidden');
-    @endisset
-
-    tinymce.init({
-        selector: '#body',
-        height: 300,
-        menubar: true,
-        plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
-        ],
-        toolbar: 'undo redo | formatselect | ' +
-            'bold italic backcolor | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help',
-        setup: function(editor) {
-            editor.on('init', function() {
-                @isset($blog['body'])
-                    editor.setContent('{{ $blog["body"] }}', { format: 'html' });
-                @endisset
-            });
-        }
-    });
-
-    @if(auth()->user()->canUpdateBlogs())
-        id = '{{ isset($blog) ? $blog["id"] : "" }}';
-
-        const validators = {
-            tag_id: {
-                validators: {
-                    notEmpty: {}
-                }
-            },
-            header_image: {
-                validators: {
-                    file: {
-                        extension: 'jpg,jpeg,png',
-                        type: 'image/jpeg,image/png',
-                        message: 'Only jpg, jpeg, and png are allowed',
-                        maxSize: 1024000
-                    }
-                }
-            },
-            // header_image_form: {
-            //     validators: {
-            //         notEmpty: {}
-            //     }
-            // },
-            title: {
-                validators: {
-                    notEmpty: {}
-                }
-            },
-            body: {
-                validators: {
-                    notEmpty: {},
-                }
-            }
-        };
-
-        BlogsForm.callFormValidation(validators).on('success.form.fv', function (e) {
-            e.preventDefault();
-            const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-
-            const $form = $(e.target),
-                fv = $form.data('formValidation');
-                let formData = new FormData();
-
-            for (var p of ($form.serialize()).split("&")) {
-                var k = p.split("=")
-                formData.append(k[0], decodeURI(k[1]));
-            }
-            formData.append('header_image', document.getElementById('header_image').files[0]);
-            formData.append('body', tinymce.get('body').getContent());
-
-            const Axios = axios.post($form.attr('action'), formData, config);
-            BlogsForm.waitMeShow();
-            Axios.then((response) => {
-                BlogsForm.waitMeHide();
-                successResponse(response.data);
-                setTimeout(() => {
-                    window.location.href = '{{ url("blogs") }}';
-                }, 1000)
-            });
-            Axios.catch((error) => {
-                BlogsForm.waitMeHide();
-                failedResponse(error);
-            });
+            placeholder: 'Choose tags',
         });
-    @else
-        $('form').on('submit', e => {
-            e.preventDefault();
-            // $('#profile_user_img').hide();
+
+        $('#header_image_form').hide();
+        $('.profile_user_img').hide();
+
+        BlogsForm.on('click', '#header_image_form', function() {
+            $('input[name="header_image"]').click();
         });
-    @endif
+
+        BlogsForm.on('change', 'input[name="header_image"]', function() {
+            $('#profile_user_img').show();
+            var preview = document.querySelector('#profile_user_img');
+            var file    = document.querySelector('input[type=file]').files[0];
+            var reader  = new FileReader();
+            BlogsForm.find('#header_image_form').val(document.querySelector('input[type=file]').files[0].name);
+            reader.onloadend = function () { preview.src = reader.result; }
+
+            if (file) {
+                reader.readAsDataURL(file);
+                console.log(file);
+                console.log($('#header_image').val());
+            } else {
+                preview.src = '';
+            }
+        });
+
+        @isset($blog['header_image'])
+            $('#header_image_form').show();
+            $('#profile_user_img').show();
+            $('#header_image').addClass('hidden');
+        @endisset
+
+        tinymce.init({
+            selector: '#body',
+            height: 300,
+            menubar: true,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            setup: function(editor) {
+                editor.on('init', function() {
+                    @isset($blog['body'])
+                        editor.setContent('{{ $blog["body"] }}', { format: 'html' });
+                    @endisset
+                });
+            }
+        });
+
+        @if(auth()->user()->canUpdateBlogs())
+            id = '{{ isset($blog) ? $blog["id"] : "" }}';
+
+            const validators = {
+                tag_id: {
+                    validators: {
+                        notEmpty: {}
+                    }
+                },
+                header_image: {
+                    validators: {
+                        file: {
+                            extension: 'jpg,jpeg,png',
+                            type: 'image/jpeg,image/png',
+                            message: 'Only jpg, jpeg, and png are allowed',
+                            maxSize: 1024000
+                        }
+                    }
+                },
+                // header_image_form: {
+                //     validators: {
+                //         notEmpty: {}
+                //     }
+                // },
+                title: {
+                    validators: {
+                        notEmpty: {}
+                    }
+                },
+                body: {
+                    validators: {
+                        notEmpty: {},
+                    }
+                }
+            };
+
+            BlogsForm.callFormValidation(validators).on('success.form.fv', function (e) {
+                e.preventDefault();
+                const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+                const $form = $(e.target),
+                    fv = $form.data('formValidation');
+                    let formData = new FormData();
+
+                for (var p of ($form.serialize()).split("&")) {
+                    var k = p.split("=")
+                    formData.append(k[0], decodeURI(k[1]));
+                }
+                formData.append('header_image', document.getElementById('header_image').files[0]);
+                formData.append('body', tinymce.get('body').getContent());
+
+                const Axios = axios.post($form.attr('action'), formData, config);
+                BlogsForm.waitMeShow();
+                Axios.then((response) => {
+                    BlogsForm.waitMeHide();
+                    successResponse(response.data);
+                    setTimeout(() => {
+                        window.location.href = '{{ url("blogs") }}';
+                    }, 1000)
+                });
+                Axios.catch((error) => {
+                    BlogsForm.waitMeHide();
+                    failedResponse(error);
+                });
+            });
+        @else
+            $('form').on('submit', e => {
+                e.preventDefault();
+                // $('#profile_user_img').hide();
+            });
+        @endif
+    });
         
 </script>
 @endsection
