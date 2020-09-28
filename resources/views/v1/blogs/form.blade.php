@@ -162,10 +162,15 @@
         toolbar: 'undo redo | formatselect | ' +
             'bold italic backcolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help'
+            'removeformat | help',
+        setup: function(editor) {
+            editor.on('init', function() {
+                @isset($blog['body'])
+                    tinymce.activeEditor.setContent('{{ $blog["body"] }}');
+                @endisset
+            });
+        }
     });
-    let body = '{{ isset($blog) ? $blog["body"] : "" }}';
-    tinymce.activeEditor.setContent(body);    
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
