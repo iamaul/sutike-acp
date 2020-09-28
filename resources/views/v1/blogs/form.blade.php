@@ -144,12 +144,6 @@
         }
     });
 
-    @isset($blog['header_image'])
-        $('#header_image_form').show();
-        $('#profile_user_img').show();
-        $('#header_image').addClass('hidden');
-    @endisset
-
     tinymce.init({
         selector: '#body',
         height: 300,
@@ -167,9 +161,16 @@
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
-        let body = document.getElementById('body').value = '{{ isset($blog) ? $blog["body"] : "" }}';
-        let bodyHtml = document.getElementById('body').innerHTML = body;
-        tinymce.get('body').setContent($bodyHtml);
+        let body = '{{ isset($blog) ? $blog["body"] : "" }}';
+
+        tinymce.get('body').setContent(body);
+
+        @isset($blog['header_image'])
+            $('#header_image_form').show();
+            $('#profile_user_img').show();
+            $('#header_image').addClass('hidden');
+        @endisset
+
         const validators = {
             tag_id: {
                 validators: {
