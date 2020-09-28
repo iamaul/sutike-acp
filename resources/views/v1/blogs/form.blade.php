@@ -168,7 +168,8 @@
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
         let body = document.getElementById('body').value = '{{ isset($blog) ? $blog["body"] : "" }}';
-        tinymce.get('body').setContent($body);
+        let bodyHtml = document.getElementById('body').innerHTML = body;
+        tinymce.get('body').setContent($bodyHtml);
         const validators = {
             tag_id: {
                 validators: {
