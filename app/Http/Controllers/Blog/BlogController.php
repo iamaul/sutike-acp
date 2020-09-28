@@ -96,6 +96,7 @@ class BlogController extends Controller
             $blogs = $blogs->getCollection();
             return Datatables::of($blogs)
                 ->addColumn('action', __v().'.blogs.datatables.action')
+                ->editColumn('header_image', "<img src='{{ Storage::cloud()->url($header_image) }}' alt='{{ ucwords($header_image) }}' class='img-responsive avatar-on-table'>")
                 ->skipPaging()
                 ->setTotalRecords($total)
                 ->setFilteredRecords($total)
