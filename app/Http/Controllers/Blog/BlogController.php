@@ -197,21 +197,21 @@ class BlogController extends Controller
      */
     public function update(BlogRequest $request, $id)
     {
-        $blog = $this->blogs->find($id);
-
-        $current_file = '';
-        $old_file = '';
-        $slug = Str::slug($request->title, '-');
-
-        if ($request->file('header_image')) {
-            // New file image
-            $current_file = Storage::cloud()->put('blogs', file_get_contents($request->file('header_image')), 'public');
-            // Old file image
-            $old_file = $blog->header_image;
-            Storage::cloud()->delete($old_file);
-        }
-
         if ($request->ajax()) {   
+            $blog = $this->blogs->find($id);
+
+            $current_file = '';
+            $old_file = '';
+            $slug = Str::slug($request->title, '-');
+            
+            if ($request->file('header_image')) {
+                // New file image
+                $current_file = Storage::cloud()->put('blogs', file_get_contents($request->file('header_image')), 'public');
+                // Old file image
+                $old_file = $blog->header_image;
+                Storage::cloud()->delete($old_file);
+            }
+
             $blog->update([
                 'tag_id'    =>  $request->tag_id,
                 'title'     =>  $request->title,
@@ -221,7 +221,7 @@ class BlogController extends Controller
             ]);
             return response()->successResponse(microtime_float(), $blog, 'Blog updated successfully');
         }
-        // return response()->failedResponse(microtime_float(), 'Failed to update blog');
+        return response()->failedResponse(microtime_float(), 'Failed to update blog');
     }
 
     /**
