@@ -166,7 +166,7 @@
     });
 
     @isset($blog['body'])
-        tinymce.get('body').setContent('{{ $blog['body'] }}');
+        tinymce.get('body').setContent('{{ $blog["body"] }}');
     @endisset
 
     @if(auth()->user()->canUpdateBlogs())
