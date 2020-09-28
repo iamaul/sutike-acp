@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="body" class="control-label">Body <span class="star" style="color:red">*</span></label>
-                                            <textarea id="body" name="body" class="form-control"></textarea>
+                                            <textarea name="body" class="form-control tinymce-editor"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@
     @endif
 
     tinymce.init({
-        selector: '#body',
+        selector: 'textarea.tinymce-editor',
         height: 300,
         menubar: true,
         plugins: [
@@ -216,10 +216,7 @@
                 formData.append(k[0], decodeURI(k[1]));
             }
             formData.append('header_image', document.getElementById('header_image').files[0]);
-
-            let content = document.getElementById('body').value;
-            let body = document.getElementById('body').innerHTML = content;
-            formData.append('body', body);
+            formData.append('body', document.getElementsByName('name'));
 
             const Axios = axios.post($form.attr('action'), formData, config);
             BlogsForm.waitMeShow();
