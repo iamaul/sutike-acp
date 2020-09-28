@@ -85,6 +85,15 @@
         drawCallback: function(){}
     });
 
+    $(document).on('click', '._edit', function(e) {
+        e.preventDefault();
+        @if (auth()->user()->canUpdateBlogs())
+            const _this = $(this);
+            var href = '{{ url("blogs") }}' + '/' + `${_this.data('id')}`+'/edit';
+            window.open(href,'_self');
+        @endif
+    });
+
     $(document).on('click', '._destroy', function(e) {
         e.preventDefault();
         @if (auth()->user()->canDestroyBlogs())
