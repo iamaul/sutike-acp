@@ -46,7 +46,7 @@ class NavigationComposer
                 $icon    = !is_null($v['parent']) ? "fa fa-circle-o" : $v['icon'];
                 $chevron = sizeof($v['children']) > 0 ? '<i class="fa fa-angle-left pull-right"></i>' : "";
                 $active  = explode('.', \Route::current()->getName())[0] == $v['route'] || in_array(explode('.', \Route::current()->getName())[0], array_column($v['children'], 'route')) ? 'active' : '';
-                $html    .= "<li class='treeview {$active}'><a href='{$link}' class='child-nav'><i class='{$icon}'>&nbsp;</i><span>{$name}</span>{$chevron}</a>";
+                $html    .= "<li class='treeview {$active}'><a href='{$link}' class='child-nav'><i class='{$icon}'>&nbsp;&nbsp;</i><span>{$name}</span>{$chevron}</a>";
                 if (sizeof($v['children']) > 0):
                     $parent_active = '';
                     if(in_array(explode('.', \Route::current()->getName())[0], array_column($v['children'], 'route'))){
