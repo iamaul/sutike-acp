@@ -1,4 +1,5 @@
 {
     "blogs": "2020_09_27_115721_create_blogs_table",
-    "blog_tags": "2020_09_27_115732_create_blog_tags_table"
+    "blog_tags": "2020_09_27_115732_create_blog_tags_table",
+    "products": "2020_09_30_021611_create_products_table"
 }

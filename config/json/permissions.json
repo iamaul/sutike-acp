@@ -53,5 +53,15 @@
         "update-blog-tags",
         "destroy-blog-tags",
         "-blog-tags"
+    ],
+    "products": [
+        "index-products",
+        "create-products",
+        "show-products",
+        "store-products",
+        "edit-products",
+        "update-products",
+        "destroy-products",
+        "-products"
     ]
 }

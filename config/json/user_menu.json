@@ -1,15 +1,16 @@
 {
     "user_menu": [
         "dashboard",
-        "users",
-        "access control",
         "roles",
         "access",
         "permissions",
-        "setting",
         "menu",
-        "master content",
-        "blog tags",
-        "blogs"
+        "blogs",
+        "tags",
+        "users",
+        "setting",
+        "access control",
+        "master blog",
+        "products"
     ]
 }
