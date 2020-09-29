@@ -167,11 +167,12 @@
         setup: function (editor) {
             editor.on('init', function (e) {
                 @isset($blog['body'])
-                    editor.setContent('{!! $blog["body"] !!}', { format: 'html' });
+                    editor.setContent('{{ $blog["body"] }}');
                 @endisset
             });
         }
     });
+    $('#body').html('{{ $blog["body"] }}');
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
