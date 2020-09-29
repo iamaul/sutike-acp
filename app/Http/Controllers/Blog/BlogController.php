@@ -182,7 +182,6 @@ class BlogController extends Controller
     public function edit(BlogRequest $request, $id)
     {
         $blog = $this->blogs->with('blogTags')->find($id);
-        // $html_entity = htmlspecialchars_decode($blog->body);
         return view("{$this->view}::blogs.form", ['blog' => $blog]);
     }
 
