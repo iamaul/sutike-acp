@@ -228,7 +228,7 @@
                 formData.append(k[0], decodeURI(k[1]));
             }
             formData.append('header_image', document.getElementById('header_image').files[0]);
-            formData.append('body', tinymce.get('body').getContent());
+            formData.append('body', tinymce.get('body').getContent({ format: 'html' }));
 
             const Axios = axios.post($form.attr('action'), formData, config);
             BlogsForm.waitMeShow();
