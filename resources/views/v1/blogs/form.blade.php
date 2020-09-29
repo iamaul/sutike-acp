@@ -166,6 +166,7 @@
             'removeformat | help',
         setup: function (editor) {
             editor.on('init', function (e) {
+                console.log('{{ $html_entity }}');
                 @isset($blog['body'])
                     editor.setContent('{{ $html_entity }}');
                 @endisset
