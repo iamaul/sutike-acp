@@ -168,7 +168,7 @@
             editor.on('init', function (e) {
                 console.log('{{ $html_entity }}');
                 @isset($blog['body'])
-                    editor.setContent('<b>HELLO WORLD</b>');
+                    editor.setContent('{{ $html_entity }}');
                 @endisset
             });
         }
