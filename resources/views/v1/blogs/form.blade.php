@@ -172,7 +172,7 @@
             });
         }
     });
-    $('#body').html('{{ $blog["body"] }}');
+    document.getElementById('body').innerHTML = '{{ $blog["body"] }}';
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
