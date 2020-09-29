@@ -66,7 +66,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="body" class="control-label">Body <span class="star" style="color:red">*</span></label>
-                                            <textarea id="body" name="body" class="form-control">{!! $blog['body'] !!}</textarea>
+                                            <textarea id="body" name="body" class="form-control">{{ isset($blog['body']) ? {!! $blog['body'] !!} : '' }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
         }
     });
 
-    @isset($blog['header_image'])
+    @isset('{{ $blog["header_image"] }}')
         $('#header_image_form').show();
         $('#profile_user_img').show();
         $('#header_image').addClass('hidden');
