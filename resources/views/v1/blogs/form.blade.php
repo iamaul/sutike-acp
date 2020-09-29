@@ -164,15 +164,18 @@
             'bold italic backcolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help',
-        setup: function (editor) {
-            editor.on('init', function (e) {
-                @isset($blog['body'])
-                    editor.setContent('{{ $blog["body"] }}');
-                @endisset
-            });
-        }
+        // setup: function (editor) {
+        //     editor.on('init', function (e) {
+        //         @isset($blog['body'])
+        //             editor.setContent('{{ $blog["body"] }}');
+        //         @endisset
+        //     });
+        // }
     });
-    document.getElementById('body').innerHTML = '{{ $blog["body"] }}';
+
+    let body = document.getElementById('body').value = '{{ $blog["body"] }}';
+    let bodyHTML = document.getElementById('body').innerHTML = body;
+    tinymce.get('body').setContent(bodyHTML);
 
     @if(auth()->user()->canUpdateBlogs())
         id = '{{ isset($blog) ? $blog["id"] : "" }}';
