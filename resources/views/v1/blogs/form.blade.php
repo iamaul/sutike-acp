@@ -145,7 +145,7 @@
         }
     });
 
-    @isset('{{ $blog["header_image"] }}')
+    @isset($blog['header_image'])
         $('#header_image_form').show();
         $('#profile_user_img').show();
         $('#header_image').addClass('hidden');
