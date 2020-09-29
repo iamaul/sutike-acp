@@ -66,7 +66,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="body" class="control-label">Body <span class="star" style="color:red">*</span></label>
-                                            <textarea id="body" name="body" class="form-control">{{ $blog['body'] }}</textarea>
+                                            <textarea id="body" name="body" class="form-control">{!! $blog['body'] !!}</textarea>
                                         </div>
                                     </div>
                                 </div>
