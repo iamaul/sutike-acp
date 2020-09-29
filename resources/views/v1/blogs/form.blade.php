@@ -173,8 +173,8 @@
         // }
     });
 
-    let body = document.getElementById('body').value = '{{ $blog["body"] }}';
-    let bodyHTML = document.getElementById('body').innerHTML = body;
+    // let body = document.getElementById('body').value = '{{ $blog["body"] }}';
+    let bodyHTML = document.getElementById('body').innerHTML = '{{ $blog["body"] }}';
     tinymce.get('body').setContent(bodyHTML);
 
     @if(auth()->user()->canUpdateBlogs())
