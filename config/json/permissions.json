@@ -63,5 +63,15 @@
         "update-products",
         "destroy-products",
         "-products"
+    ],
+    "product-categories": [
+        "index-product-categories",
+        "create-product-categories",
+        "show-product-categories",
+        "store-product-categories",
+        "edit-product-categories",
+        "update-product-categories",
+        "destroy-product-categories",
+        "-product-categories"
     ]
 }

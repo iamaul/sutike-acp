@@ -109,5 +109,14 @@
         "icon": "fa fa-windows",
         "route": "products",
         "child": []
+    },
+    {
+        "id": "91a76a8d-c810-4bc6-9339-713089bc7b77",
+        "queue": 7,
+        "en_name": "product categories",
+        "id_name": "product categories",
+        "icon": "fa fa-windows",
+        "route": "product-categories",
+        "child": []
     }
 ]
