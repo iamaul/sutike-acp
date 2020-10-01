@@ -34,6 +34,7 @@
         </div>
     </div>
 </section>
+@include('v1.product-categories.form')
 @endsection
 
 @section('js')
@@ -108,4 +109,5 @@
         @endif
     });
 </script>
+@include('v1.product-categories.form-js')
 @endsection
