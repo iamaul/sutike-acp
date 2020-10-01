@@ -63,7 +63,7 @@
                                                 <input type="text" class="form-control" id="name" name="name" value="{{ isset($product['name']) ? $product['name'] : '' }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="price" class="control-label">Price <span class="star" style="color:red">*</span></label>
                                                 <input type="text" class="form-control price" id="price" name="price" 
@@ -77,7 +77,7 @@
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group" id="cut-price">
                                                 <label for="sale_price" class="control-label">Cut-price <span class="star" style="color:red">*</span></label>
                                                 <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
@@ -202,8 +202,9 @@
 
     $('#price').formatPrice();
     $('#sale_price').formatPrice();
+
     @isset($product['on_sale']) 
-        @if($product['on_sale'])
+        @if(document.getElementById('on_sale').checked)
             $('#cut-price').show();
         @else
             $('#cut-price').hide();
@@ -211,6 +212,14 @@
     @else
         $('#cut-price').hide();
     @endisset
+
+    $('#on_sale').change(function () {
+        if ($(this).is(':checked')) {
+            $('#on_sale').val(true);
+        } else {
+            $('#on_sale').val(false);
+        }
+    });
 
     ProductsForm.on('click', '#product_image_form', function() {
         $('input[name="product_image"]').click();
