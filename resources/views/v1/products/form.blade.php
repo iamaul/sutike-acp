@@ -235,7 +235,7 @@
         }
     });
 
-    @isset($product['product_image'])
+    @isset($product['image'])
         $('#product_image_form').show();
         $('#profile_user_img').show();
         $('#product_image').addClass('hidden');
