@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Product;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\Request as ProductRequest;
 
