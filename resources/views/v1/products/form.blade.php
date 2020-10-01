@@ -215,6 +215,8 @@
         @else
             $('#cut-price_field').hide();
         @endif
+    @else
+        $('#cut-price_field').hide();
     @endisset
 
     ProductsForm.on('click', '#product_image_form', function() {
