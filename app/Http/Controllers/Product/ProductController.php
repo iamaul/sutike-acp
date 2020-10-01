@@ -147,7 +147,7 @@ class ProductController extends Controller
                 'stock'                 =>  $request->stock,
                 'status'                =>  $request->status
             ]);
-            $product_category = $this->product_categories->find($product->product_category_id);
+            $product_category = $this->product_categories->find($request->product_category_id);
             $category = $product_category['name'];
 
             if ($request->file('product_image')) {
