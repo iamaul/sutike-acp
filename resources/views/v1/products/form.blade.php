@@ -73,7 +73,7 @@
                                         <div class="col-sm-9">
                                             <br>
                                             <div class="input-group">
-                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" <?php $product['on_sale'] ? 'checked' : '' ?>>
+                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();">
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
