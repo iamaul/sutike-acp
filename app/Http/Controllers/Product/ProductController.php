@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\Request as ProductRequest;
 
+use Yajra\Datatables\Datatables;
+
 class ProductController extends Controller
 {
     /**
