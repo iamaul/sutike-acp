@@ -73,12 +73,12 @@
                                         <div class="col-sm-9">
                                             <br>
                                             <div class="input-group">
-                                                <input type="checkbox" id="on_sale" name="on_sale" value="{{ isset($product['on_sale']) ? $product['on_sale'] : false }}" 
-                                                    onclick="getDiscountCheckedState();" {{ isset($product['on_sale']) ? 'checked' : '' }}>
+                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" 
+                                                    {{ isset($product['on_sale']) ? 'checked' : '' }}>
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <div class="form-group" id="cut-price">
                                                 <label for="sale_price" class="control-label">Cut-price <span class="star" style="color:red">*</span></label>
                                                 <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
