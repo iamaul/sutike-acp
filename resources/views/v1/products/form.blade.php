@@ -77,7 +77,7 @@
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group" id="cut-price">
                                                 <label for="sale_price" class="control-label">Cut-price <span class="star" style="color:red">*</span></label>
                                                 <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
