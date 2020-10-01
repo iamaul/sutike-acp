@@ -65,8 +65,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="price" class="control-label">Price <span class="star" style="color:red">*</span></label>
-                                                <div class="col-sm-7">
+                                                <label for="price" class="col-sm-3 control-label">Price <span class="star" style="color:red">*</span></label>
+                                                <div class="col-sm-8">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control price" id="price" name="price" 
                                                             autocomplete="off" style="padding-right: 12px;"
