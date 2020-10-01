@@ -98,6 +98,7 @@ class ProductController extends Controller
             return Datatables::of($products)
                 ->addColumn('action', __v().'.products.datatables.action')
                 ->editColumn('product_image', '<img src="{{ Storage::cloud()->url($product_image) }}" alt="{{ ucwords($product_image) }}" class="img-responsive avatar-on-table">')
+                ->editColumn('status', '{{ $status ? "Public" : "Private" }}')
                 ->skipPaging()
                 ->setTotalRecords($total)
                 ->setFilteredRecords($total)
