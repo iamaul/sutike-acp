@@ -15,12 +15,17 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }}
+                            {{-- {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }} --}}
                             <table id="products" class="table table-hover dt-responsive nowrap">
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Category</th>
+                                        <th>Image</th>
                                         <th>Name</th>
+                                        <th>Slug</th>
+                                        <th>Stock</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -45,10 +50,7 @@
             add: {
                 addCallback: function() {
                     @if (auth()->user()->canCreateProducts())
-                        FormProducts.find('.modal').modal('show');
-                        FormProducts.find('.modal-title').html('CREATE USER');
-                        FormProducts.attr('action', '/users');
-                        FormProducts.find('[name="_method"]').val('POST');
+                        window.open('{{ url('products/create') }}', '_self');
                     @endif
                 }
             },
@@ -66,7 +68,12 @@
         data: {
             columns: [
                 { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
+                { data: 'category_name', name: 'category_name', orderable: true, searchable: true },
+                { data: 'product_image', name: 'product_image', orderable: true, searchable: true },
                 { data: 'name', name: 'name', orderable: true, searchable: true },
+                { data: 'slug', name: 'slug', orderable: true, searchable: true },
+                { data: 'stock', name: 'stock', orderable: true, searchable: true },
+                { data: 'status', name: 'status', orderable: true, searchable: true },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
             columnDefs: [{
@@ -78,6 +85,15 @@
             orderDefs: [0, 'desc']
         },
         drawCallback: function(){}
+    });
+
+    $(document).on('click', '._edit', function(e) {
+        e.preventDefault();
+        @if (auth()->user()->canUpdateProducts())
+            const _this = $(this);
+            var href = '{{ url("products") }}' + '/' + `${_this.data('id')}`+'/edit';
+            window.open(href,'_self');
+        @endif
     });
 
     $(document).on('click', '._destroy', function(e) {

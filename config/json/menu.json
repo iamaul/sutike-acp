@@ -102,21 +102,31 @@
         ]
     },
     {
-        "id": "91a5a95e-3bf7-4f84-bdc5-727943b6ae57",
+        "id": "f081a1ff-a59a-4b87-af13-66c350ed4af1",
         "queue": 6,
-        "en_name": "products",
-        "id_name": "products",
-        "icon": "fa fa-windows",
-        "route": "products",
-        "child": []
-    },
-    {
-        "id": "91a76a8d-c810-4bc6-9339-713089bc7b77",
-        "queue": 7,
-        "en_name": "product categories",
-        "id_name": "product categories",
-        "icon": "fa fa-windows",
-        "route": "product-categories",
-        "child": []
+        "en_name": "master product",
+        "id_name": "master produk",
+        "icon": "fas fa-box",
+        "route": "#",
+        "child": [
+            {
+                "id": "91a76a8d-c810-4bc6-9339-713089bc7b77",
+                "queue": 1,
+                "en_name": "product categories",
+                "id_name": "product categories",
+                "icon": "fa fa-windows",
+                "route": "product-categories",
+                "child": []
+            },
+            {
+                "id": "91a5a95e-3bf7-4f84-bdc5-727943b6ae57",
+                "queue": 2,
+                "en_name": "products",
+                "id_name": "products",
+                "icon": "fa fa-windows",
+                "route": "products",
+                "child": []
+            }
+        ]
     }
 ]

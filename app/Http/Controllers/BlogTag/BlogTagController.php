@@ -208,9 +208,9 @@ class BlogTagController extends Controller
                 if ($blog_tags) array_push($id_can_be_destroy, $id);
             }
             if ($blog_tags->destroy($id_can_be_destroy)) {
-                return response()->successResponse(microtime_float(), [], 'Blog tags deleted successfully');
+                return response()->successResponse(microtime_float(), [], 'blog_tags deleted successfully');
             }
-            return response()->failedResponse(microtime_float(), 'Failed to delete blog tags');
+            return response()->failedResponse(microtime_float(), 'Failed to delete blog_tags');
         }
     }
 }

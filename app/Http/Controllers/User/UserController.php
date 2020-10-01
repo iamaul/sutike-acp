@@ -144,7 +144,7 @@ class UserController extends Controller
                 if($user) array_push($id_can_be_destroy, $id);
             }
             if ($user->destroy($id_can_be_destroy)) {
-                return response()->successResponse(microtime_float(), [], 'Delete users successfully');
+                return response()->successResponse(microtime_float(), [], 'users deleted successfully');
             }
             return response()->failedResponse(microtime_float(), 'Failed to delete users');
         }

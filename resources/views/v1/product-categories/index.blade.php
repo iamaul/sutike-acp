@@ -15,12 +15,13 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }}
+                            {{-- {{ callout_primary('This callout generated from helpers, please check on <code>app/Service/Support/helpers.php</code>', $dimmis = false, $icon = false) }} --}}
                             <table id="product-categories" class="table table-hover dt-responsive nowrap">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
+                                        <th>Slug</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -37,7 +38,7 @@
 
 @section('js')
 <script>
-    const FormProductCategories = $('#ProductCategories');
+    const FormProductCategories = $('#product-categoriesModal');
     const Table = $('#product-categories').callFullDataTable({
         buttons: {
             visible: true,
@@ -46,8 +47,8 @@
                 addCallback: function() {
                     @if (auth()->user()->canCreateProductCategories())
                         FormProductCategories.find('.modal').modal('show');
-                        FormProductCategories.find('.modal-title').html('CREATE USER');
-                        FormProductCategories.attr('action', '/users');
+                        FormProductCategories.find('.modal-title').html('CREATE PRODUCT CATEGORIES');
+                        FormProductCategories.attr('action', '/product-categories');
                         FormProductCategories.find('[name="_method"]').val('POST');
                     @endif
                 }
@@ -67,6 +68,7 @@
             columns: [
                 { data: 'id', name: 'id', orderable: true, searchable: false, width: '3%' },
                 { data: 'name', name: 'name', orderable: true, searchable: true },
+                { data: 'slug', name: 'slug', orderable: true, searchable: true },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
             columnDefs: [{

@@ -32,7 +32,15 @@ class Product extends Model implements InterfaceModel
      * @var array
      */
     protected $fillable = [
-        //
+        'name',
+        'slug',
+        'image',
+        'description',
+        'price',
+        'on_sale',
+        'sale_price',
+        'stock',
+        'status'
     ];
 
     /**
@@ -76,10 +84,10 @@ class Product extends Model implements InterfaceModel
                     'except' => []
                 ])->middleware(\App\Models\Permission::getPermission('products'));
                 // Uncomment this if your implement multiple delete resource
-                // $route->delete('/products', [
-                //     'as' => 'products.destroyMany',
-                //     'uses' => 'ProductController@destroyMany'
-                // ]);
+                $route->delete('/products', [
+                    'as' => 'products.destroyMany',
+                    'uses' => 'ProductController@destroyMany'
+                ]);
             }),
         ];
     }
@@ -145,5 +153,13 @@ class Product extends Model implements InterfaceModel
     public function getDeletedAtAttribute($value)
     {
         return carbon()->parse($this->attributes['deleted_at'])->format('d-m-Y');
+    }
+
+    /**
+     * Associate for product_categories attribute.
+     */
+    public function productCategories()
+    {
+        return $this->belongsTo('App\Models\ProductCategory', 'product_category_id');
     }
 }

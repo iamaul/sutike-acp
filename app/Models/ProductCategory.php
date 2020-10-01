@@ -32,7 +32,8 @@ class ProductCategory extends Model implements InterfaceModel
      * @var array
      */
     protected $fillable = [
-        //
+        'name',
+        'slug'
     ];
 
     /**
@@ -72,14 +73,18 @@ class ProductCategory extends Model implements InterfaceModel
         $route = app()->make('router');
         return [
             $route->namespace('ProductCategory')->group(function() use ($route) {
+                $route->get('/product-categories/select2', [
+                    'as' => 'product-categories.select2',
+                    'uses' => 'ProductCategoryController@select2'
+                ]);
                 $route->resource('/product-categories', 'ProductCategoryController', [
                     'except' => []
                 ])->middleware(\App\Models\Permission::getPermission('product-categories'));
                 // Uncomment this if your implement multiple delete resource
-                // $route->delete('/product-categories', [
-                //     'as' => 'product-categories.destroyMany',
-                //     'uses' => 'ProductCategoryController@destroyMany'
-                // ]);
+                $route->delete('/product-categories', [
+                    'as' => 'product-categories.destroyMany',
+                    'uses' => 'ProductCategoryController@destroyMany'
+                ]);
             }),
         ];
     }

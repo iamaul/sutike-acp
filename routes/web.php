@@ -32,6 +32,8 @@ Route::prefix(__prefix())->group(function(){
 		\App\Models\Permission::routes();
 		\App\Models\BlogTag::routes();
 		\App\Models\Blog::routes();
+		\App\Models\ProductCategory::routes();
+		\App\Models\Products::routes();
 
 	});
 
