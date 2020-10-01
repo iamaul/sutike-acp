@@ -63,69 +63,71 @@
                                                 <input type="text" class="form-control" id="name" name="name" value="{{ isset($product['name']) ? $product['name'] : '' }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="price" class="col-sm-3 control-label">Price <span class="star" style="color:red">*</span></label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control price" id="price" name="price" 
-                                                        autocomplete="off" style="padding-right: 12px;"
-                                                        value="{{ isset($product['price']) ? $product['price'] : '' }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="price" class="col-sm-3 control-label">Price <span class="star" style="color:red">*</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control price" id="price" name="price" 
+                                                            autocomplete="off" style="padding-right: 12px;"
+                                                            value="{{ isset($product['price']) ? $product['price'] : '' }}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <br>
-                                            <div class="input-group">
-                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" {{ isset($product['on_sale']) ? 'checked' : '' }}/>
-                                                <label for="on_sale" style="padding-left:10px;">Discount?</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="sale_price" class="col-sm-3 control-label">Cut-price <span class="star" style="color:red">*</span></label>
+                                            <div class="col-sm-9">
+                                                <br>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
-                                                        autocomplete="off" style="padding-right: 12px;"
-                                                        value="{{ isset($product['sale_price']) ? $product['sale_price'] : '' }}">
+                                                    <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" {{ isset($product['on_sale']) ? 'checked' : '' }}/>
+                                                    <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="stock" class="control-label">Stock <span class="star" style="color:red">*</span></label>
-                                                <input type="number" class="form-control" id="stock" name="stock"
-                                                    value="{{ isset($product['stock']) ? $product['stock'] : 0 }}">
+                                            <div class="col-md-4" id="cut-price">
+                                                <div class="form-group">
+                                                    <label for="sale_price" class="col-sm-3 control-label">Cut-price <span class="star" style="color:red">*</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
+                                                            autocomplete="off" style="padding-right: 12px;"
+                                                            value="{{ isset($product['sale_price']) ? $product['sale_price'] : '' }}">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="status" class="control-label">Status <span class="star" style="color:red">*</span></label>
-                                                <select class="form-control" name="status" id="status">
-                                                    @if(isset($product['status']))
-                                                        @if($product['status'])
-                                                            <option value="true" selected>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="stock" class="control-label">Stock <span class="star" style="color:red">*</span></label>
+                                                    <input type="number" class="form-control" id="stock" name="stock"
+                                                        value="{{ isset($product['stock']) ? $product['stock'] : 0 }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="status" class="control-label">Status <span class="star" style="color:red">*</span></label>
+                                                    <select class="form-control" name="status" id="status">
+                                                        @if(isset($product['status']))
+                                                            @if($product['status'])
+                                                                <option value="true" selected>
+                                                                    Private
+                                                                </option>
+                                                                <option value="false">
+                                                                    Public
+                                                                </option>
+                                                            @else
+                                                                <option value="true">
+                                                                    Private
+                                                                </option>
+                                                                <option value="false" selected>
+                                                                    Public
+                                                                </option>
+                                                            @endif
+                                                        @else
+                                                            <option value="true">
                                                                 Private
                                                             </option>
                                                             <option value="false">
                                                                 Public
                                                             </option>
-                                                        @else
-                                                            <option value="true">
-                                                                Private
-                                                            </option>
-                                                            <option value="false" selected>
-                                                                Public
-                                                            </option>
                                                         @endif
-                                                    @else
-                                                        <option value="true">
-                                                            Private
-                                                        </option>
-                                                        <option value="false">
-                                                            Public
-                                                        </option>
-                                                    @endif
-                                                </select>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -209,12 +211,12 @@
     $('#price').formatPrice();
     @isset($product['on_sale']) 
         @if($product['on_sale'])
-            $('#sale_price').show();
+            $('#cut-price').show();
         @else
-            $('#sale_price').hide();
+            $('#cut-price').hide();
         @endif
     @else
-        $('#sale_price').hide();
+        $('#cut-price').hide();
     @endisset
 
     ProductsForm.on('click', '#product_image_form', function() {
@@ -354,7 +356,7 @@
 
     function getDiscountCheckedState() {
         let input = document.getElementById("on_sale");
-        let cutPrice = document.getElementById("sale_price");
+        let cutPrice = document.getElementById("cut-price");
         let isChecked = input.checked;
         if (isChecked) {
             cutPrice.style.display = 'block';
