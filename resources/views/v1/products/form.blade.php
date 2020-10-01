@@ -73,7 +73,7 @@
                                         <div class="col-sm-9">
                                             <br>
                                             <div class="input-group">
-                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();">
+                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" {{ $product['on_sale'] ? 'checked' : '' }}>
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
@@ -207,7 +207,6 @@
         @if(!$product['on_sale'])
             $('#cut-price').hide();
         @else
-            document.getElementById('on_sale').checked;
             $('#cut-price').show();
         @endif
     @else
