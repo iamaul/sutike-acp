@@ -22,6 +22,7 @@
                     @if(isset($product))
                         @method('PUT')
                     @endif
+                    <input type="hidden" id="category" name="category" value="{{ isset($product->productCategories) ? $product->productCategories->name : '' }}">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -39,7 +40,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="category" name="category" value="{{ isset($product->productCategories) ? $product->productCategories->name : '' }}">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="product_image" class="control-label">Product Image</label>
@@ -66,12 +66,10 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="price" class="col-sm-3 control-label">Price <span class="star" style="color:red">*</span></label>
-                                                <div class="col-sm-8">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control price" id="price" name="price" 
-                                                            autocomplete="off" style="padding-right: 12px;"
-                                                            value="{{ isset($product['price']) ? $product['price'] : '' }}">
-                                                    </div>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control price" id="price" name="price" 
+                                                        autocomplete="off" style="padding-right: 12px;"
+                                                        value="{{ isset($product['price']) ? $product['price'] : '' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -211,6 +209,13 @@
     $('.profile_user_img').hide();
 
     $('#price').formatPrice();
+    @isset($product['on_sale']) 
+        @if($product['on_sale'])
+            $('#cut-price_field').show();
+        @else
+            $('#cut-price_field').hide();
+        @endif
+    @endisset
 
     ProductsForm.on('click', '#product_image_form', function() {
         $('input[name="product_image"]').click();
