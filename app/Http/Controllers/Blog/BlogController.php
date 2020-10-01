@@ -204,7 +204,8 @@ class BlogController extends Controller
 
         if ($request->file('header_image')) {
             // New file image
-            $current_file = Storage::cloud()->put('blogs', file_get_contents($request->file('header_image')), 'public');
+            $current_file = $request->file('header_image')->store('blogs', 'spaces');
+            Storage::cloud()->setVisibility($current_file, 'public');
             // Old file image
             $old_file = $blog->header_image;
             Storage::cloud()->delete($old_file);
