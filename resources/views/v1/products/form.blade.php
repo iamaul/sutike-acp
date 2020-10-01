@@ -73,7 +73,8 @@
                                         <div class="col-sm-9">
                                             <br>
                                             <div class="input-group">
-                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" {{ isset($product['on_sale']) ? 'checked' : '' }}/>
+                                                <input type="checkbox" id="on_sale" name="on_sale" value="{{ isset($product['on_sale']) ? $product['on_sale'] : false }}" 
+                                                    onclick="getDiscountCheckedState();" {{ isset($product['on_sale']) ? 'checked' : '' }}>
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
@@ -212,14 +213,6 @@
     @else
         $('#cut-price').hide();
     @endisset
-
-    $('#on_sale').change(function () {
-        if ($(this).is(':checked')) {
-            $('#on_sale').val(true);
-        } else {
-            $('#on_sale').val(false);
-        }
-    });
 
     ProductsForm.on('click', '#product_image_form', function() {
         $('input[name="product_image"]').click();
