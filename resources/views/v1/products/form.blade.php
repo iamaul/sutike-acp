@@ -63,10 +63,11 @@
                                                 <input type="text" class="form-control" id="name" name="name" value="{{ isset($product['name']) ? $product['name'] : '' }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
+                                                <label for="price" class="control-label">Price <span class="star" style="color:red">*</span></label>
                                                 <input type="text" class="form-control price" id="price" name="price" 
-                                                    placeholder="Price" autocomplete="off" style="padding-right: 12px;"
+                                                    autocomplete="off" style="padding-right: 12px;"
                                                     value="{{ isset($product['price']) ? $product['price'] : '' }}">
                                             </div>
                                         </div>
@@ -79,13 +80,11 @@
                                         </div>
                                         <div class="col-md-4" id="cut-price">
                                             <div class="form-group">
-                                                <label for="sale_price" class="col-sm-3 control-label">Cut-price <span class="star" style="color:red">*</span></label>
-                                                <div class="col-sm-9">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
-                                                            autocomplete="off" style="padding-right: 12px;"
-                                                            value="{{ isset($product['sale_price']) ? $product['sale_price'] : '' }}">
-                                                    </div>
+                                                <label for="sale_price" class="control-label">Cut-price <span class="star" style="color:red">*</span></label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
+                                                        autocomplete="off" style="padding-right: 12px;"
+                                                        value="{{ isset($product['sale_price']) ? $product['sale_price'] : '' }}">
                                                 </div>
                                             </div>
                                         </div>
