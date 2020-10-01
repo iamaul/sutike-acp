@@ -73,7 +73,8 @@
                                         <div class="col-sm-9">
                                             <br>
                                             <div class="input-group">
-                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();">
+                                                <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" 
+                                                    {{ isset($product['on_sale']) ? ($product['on_sale'] ? 'checked' : '') : '' }}>
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
