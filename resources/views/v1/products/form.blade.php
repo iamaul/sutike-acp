@@ -50,7 +50,7 @@
                                                         id="profile_user_img"
                                                         name="profile_user_img"
                                                         class="profile-user-img"
-                                                        src="{{ isset($product['product_image']) ? Storage::cloud()->url($product['product_image']) : 
+                                                        src="{{ isset($product['image']) ? Storage::cloud()->url($product['image']) : 
                                                             auth()->user()->userable->avatar ?? 'https://www.gravatar.com/avatar/'.md5(strtolower(auth()->user()->email)).'.jpg?s=200&d=mm' }}"
                                                         alt="product_image"
                                                     >
