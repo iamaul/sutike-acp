@@ -97,17 +97,17 @@
                                                 <select class="form-control" name="status" id="status">
                                                     @if(isset($product['status']))
                                                         @if($product['status'])
-                                                            <option value="false" selected>
-                                                                Private
-                                                            </option>
-                                                            <option value="true">
-                                                                Public
-                                                            </option>
-                                                        @else
                                                             <option value="false">
                                                                 Private
                                                             </option>
                                                             <option value="true" selected>
+                                                                Public
+                                                            </option>
+                                                        @else
+                                                            <option value="false" selected>
+                                                                Private
+                                                            </option>
+                                                            <option value="true">
                                                                 Public
                                                             </option>
                                                         @endif
