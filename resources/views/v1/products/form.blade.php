@@ -88,12 +88,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="stock" class="control-label">Stock <span class="star" style="color:red">*</span></label>
-                                                <input type="number" class="form-control" id="stock" name="stock"
-                                                    value="{{ isset($product['stock']) ? $product['stock'] : 0 }}">
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="stock" class="control-label">Stock <span class="star" style="color:red">*</span></label>
+                                            <input type="number" class="form-control" id="stock" name="stock"
+                                                value="{{ isset($product['stock']) ? $product['stock'] : 0 }}">
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
