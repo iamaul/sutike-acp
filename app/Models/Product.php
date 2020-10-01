@@ -31,6 +31,7 @@ class Product extends Model implements InterfaceModel
      * @var array
      */
     protected $fillable = [
+        'product_category_id',
         'name',
         'slug',
         'image',
