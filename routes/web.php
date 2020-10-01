@@ -33,7 +33,7 @@ Route::prefix(__prefix())->group(function(){
 		\App\Models\BlogTag::routes();
 		\App\Models\Blog::routes();
 		\App\Models\ProductCategory::routes();
-		\App\Models\Products::routes();
+		\App\Models\Product::routes();
 
 	});
 
