@@ -74,7 +74,7 @@
                                             <br>
                                             <div class="input-group">
                                                 <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" {{ isset($product['on_sale']) ? 'checked' : '' }}/>
-                                                <label for="on_sale" style="padding-left:10px;">Discount?</label>
+                                                <label for="on_sale">Discount?</label>
                                             </div>
                                         </div>
                                         <div class="col-md-4" id="cut-price">
@@ -97,25 +97,25 @@
                                                 <select class="form-control" name="status" id="status">
                                                     @if(isset($product['status']))
                                                         @if($product['status'])
-                                                            <option value="true" selected>
+                                                            <option value="false" selected>
                                                                 Private
                                                             </option>
-                                                            <option value="false">
+                                                            <option value="true">
                                                                 Public
                                                             </option>
                                                         @else
-                                                            <option value="true">
+                                                            <option value="false">
                                                                 Private
                                                             </option>
-                                                            <option value="false" selected>
+                                                            <option value="true" selected>
                                                                 Public
                                                             </option>
                                                         @endif
                                                     @else
-                                                        <option value="true">
+                                                        <option value="false">
                                                             Private
                                                         </option>
-                                                        <option value="false">
+                                                        <option value="true">
                                                             Public
                                                         </option>
                                                     @endif
@@ -201,6 +201,7 @@
     $('.profile_user_img').hide();
 
     $('#price').formatPrice();
+    $('#sale_price').formatPrice();
     @isset($product['on_sale']) 
         @if($product['on_sale'])
             $('#cut-price').show();

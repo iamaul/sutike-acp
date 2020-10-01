@@ -143,7 +143,7 @@ class ProductController extends Controller
                 'short_description'     =>  $request->short_description,
                 'price'                 =>  intval(str_replace(".", "", str_replace("Rp", "", $request->price))),
                 'on_sale'               =>  $request->on_sale,
-                'sale_price'            =>  $request->sale_price,
+                'sale_price'            =>  intval(str_replace(".", "", str_replace("Rp", "", $request->sale_price))),
                 'stock'                 =>  $request->stock,
                 'status'                =>  $request->status
             ]);
@@ -211,7 +211,7 @@ class ProductController extends Controller
 
         if ($request->file('product_image')) {
             // New file image
-            $current_file = Storage::cloud()->put('products/'.$request->category, file_get_contents($request->file('product_image')), 'public');
+            Storage::cloud()->putFile('blogs/'.$request->category, $request->file('product_image'), 'public');
             // Old file image
             $old_file = $product->image;
             Storage::cloud()->delete($old_file);
@@ -227,7 +227,7 @@ class ProductController extends Controller
                 'short_description'     =>  $request->short_description,
                 'price'                 =>  intval(str_replace(".", "", str_replace("Rp", "", $request->price))),
                 'on_sale'               =>  $request->on_sale,
-                'sale_price'            =>  $request->sale_price,
+                'sale_price'            =>  intval(str_replace(".", "", str_replace("Rp", "", $request->sale_price))),
                 'stock'                 =>  $request->stock,
                 'status'                =>  $request->status
             ]);
