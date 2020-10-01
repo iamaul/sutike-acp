@@ -31,7 +31,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="product_category_id" class="control-label">Category <span class="star" style="color:red">*</span></label>
-                                                <select name="product_category_id" id="category_id">
+                                                <select name="product_category_id" id="product_category_id">
                                                     @if (isset($product->productCategories))
                                                         <option value="{{ $product->productCategories->id }}" selected>
                                                             {{ $product->productCategories->name }}
@@ -80,15 +80,13 @@
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="cut-price_field">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="sale_price" class="col-sm-3 control-label">Cut-price <span class="star" style="color:red">*</span></label>
-                                                <div class="col-sm-5">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
-                                                            autocomplete="off" style="padding-right: 12px;"
-                                                            value="{{ isset($product['sale_price']) ? $product['sale_price'] : '' }}">
-                                                    </div>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control sale_price" id="sale_price" name="sale_price" 
+                                                        autocomplete="off" style="padding-right: 12px;"
+                                                        value="{{ isset($product['sale_price']) ? $product['sale_price'] : '' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -211,12 +209,12 @@
     $('#price').formatPrice();
     @isset($product['on_sale']) 
         @if($product['on_sale'])
-            $('#cut-price_field').show();
+            $('#sale_price').show();
         @else
-            $('#cut-price_field').hide();
+            $('#sale_price').hide();
         @endif
     @else
-        $('#cut-price_field').hide();
+        $('#sale_price').hide();
     @endisset
 
     ProductsForm.on('click', '#product_image_form', function() {
@@ -356,7 +354,7 @@
 
     function getDiscountCheckedState() {
         let input = document.getElementById("on_sale");
-        let cutPrice = document.getElementById("cut-price_field");
+        let cutPrice = document.getElementById("sale_price");
         let isChecked = input.checked;
         if (isChecked) {
             cutPrice.style.display = 'block';
