@@ -205,10 +205,10 @@
     $('#sale_price').formatPrice();
 
     @isset($product['on_sale']) 
-        @if(document.getElementById('on_sale').checked)
-            $('#cut-price').show();
-        @else
+        @if(!$product['on_sale'])
             $('#cut-price').hide();
+        @else
+            $('#cut-price').show();
         @endif
     @else
         $('#cut-price').hide();
