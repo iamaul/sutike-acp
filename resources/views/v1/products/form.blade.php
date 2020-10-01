@@ -96,12 +96,12 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="stock" class="control-label">Stock <span class="star" style="color:red">*</span></label>
+                                                <label for="stock" class="col-sm-3 control-label">Stock <span class="star" style="color:red">*</span></label>
                                                 <input type="number" class="form-control" id="stock" name="stock"
                                                     value="{{ isset($product['stock']) ? $product['stock'] : 0 }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="status" class="control-label">Status <span class="star" style="color:red">*</span></label>
                                                 <select class="form-control" name="status" id="status">
@@ -134,7 +134,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="description" class="control-label">Description <span class="star" style="color:red">*</span></label>
                                                 <textarea id="description" name="description" class="form-control">
@@ -210,6 +210,8 @@
     $('#product_image_form').hide();
     $('.profile_user_img').hide();
 
+    $('#price').formatPrice();
+
     ProductsForm.on('click', '#product_image_form', function() {
         $('input[name="product_image"]').click();
     });
@@ -235,10 +237,6 @@
         $('#product_image_form').show();
         $('#profile_user_img').show();
         $('#product_image').addClass('hidden');
-    @endisset
-
-    @isset($product['price'])
-        $('#price').formatPrice();
     @endisset
 
     tinymce.init({
