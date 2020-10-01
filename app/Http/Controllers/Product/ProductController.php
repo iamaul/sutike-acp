@@ -142,7 +142,7 @@ class ProductController extends Controller
                 'description'           =>  $request->description,
                 'short_description'     =>  $request->short_description,
                 'price'                 =>  intval(str_replace(".", "", str_replace("Rp", "", $request->price))),
-                'on_sale'               =>  $request->on_sale,
+                'on_sale'               =>  $request->on_sale ? true : false,
                 'sale_price'            =>  intval(str_replace(".", "", str_replace("Rp", "", $request->sale_price))),
                 'stock'                 =>  $request->stock,
                 'status'                =>  $request->status

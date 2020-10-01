@@ -355,10 +355,8 @@
         let isChecked = input.checked;
         if (isChecked) {
             cutPrice.style.display = 'block';
-            console.log(input.value);
         } else {
             cutPrice.style.display = 'none';
-            console.log(input.value);
         }
     }
         
