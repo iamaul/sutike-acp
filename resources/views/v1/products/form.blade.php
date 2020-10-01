@@ -74,7 +74,7 @@
                                             <br>
                                             <div class="input-group">
                                                 <input type="checkbox" id="on_sale" name="on_sale" onclick="getDiscountCheckedState();" 
-                                                    {{ if($product['on_sale']) 'checked' }}>
+                                                    {{ @if($product['on_sale']) 'checked' @endif }}>
                                                 <label for="on_sale" style="padding-left:10px;">Discount?</label>
                                             </div>
                                         </div>
