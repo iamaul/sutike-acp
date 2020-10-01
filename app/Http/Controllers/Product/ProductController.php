@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -18,10 +19,11 @@ class ProductController extends Controller
      *
      * @return void
      */
-    public function __construct(Product $products)
+    public function __construct(Product $products, ProductCategory $product_categories)
     {
         parent::__construct();
         $this->products = $products;
+        $this->product_categories = $product_categories;
     }
 
     /**
